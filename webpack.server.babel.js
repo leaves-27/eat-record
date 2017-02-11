@@ -2,6 +2,7 @@ var babelpolyfill = require("babel-polyfill");
 var webpack = require('webpack');
 var path = require('path');
 var fs = require('fs');
+var jsonObj = JSON.parse(fs.readFileSync('./package.json'));
 
 function _externals() {
   var manifest = require('./package.json');
@@ -42,7 +43,7 @@ module.exports = {
   },
   externals:_externals(),
   output: {
-    path: `${__dirname}/build/`,
+    path: `${__dirname}/build/${jsonObj.name}`,
     filename: 'server.js'
   }
 };

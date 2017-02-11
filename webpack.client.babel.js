@@ -3,6 +3,8 @@ var webpack = require('webpack');
 var path = require("path");
 var path = require('path');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
+var jsonObj = JSON.parse(fs.readFileSync('./package.json'));
+
 
 var vendor = {
   jquery:path.join(__dirname,"bower_components/jquery/dist/jquery.min.js"),
@@ -54,7 +56,7 @@ module.exports = {
     new ExtractTextPlugin("bundle.css")
   ],
   output: {
-    path: `${__dirname}/build/static`,
+    path: `${__dirname}/${jsonObj.name}/build/static`,
     filename: 'bundle.js',
     publicPath:'/static'
   }
