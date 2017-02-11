@@ -22,6 +22,9 @@ export  function get(state = {},action){
         },{
           name:'晚餐',
           groups:[]
+        },{
+          name:'其他',
+          groups:[]
         }]
       };
 
