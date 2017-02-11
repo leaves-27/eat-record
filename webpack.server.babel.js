@@ -4,7 +4,7 @@ var path = require('path');
 var fs = require('fs');
 var jsonObj = JSON.parse(fs.readFileSync('./package.json'));
 
-function externals() {
+function _externals() {
   var manifest = require('./package.json');
   var dependencies = manifest.dependencies;
   var externals = {};
@@ -19,7 +19,6 @@ module.exports = {
   entry:{
     server:'./src/server/index.js'
   },
-  context: __dirname,
   node:{
     console:true,
     __filename:true,
@@ -40,9 +39,9 @@ module.exports = {
       loader: "style-loader!css-loader!stylus-loader"
     }]
   },
-  externals: externals,
+  externals: _externals(),
   output: {
-    path: `${__dirname}/build/${jsonObj.name}`,
+    path: `build/${jsonObj.name}`,
     filename: 'server.js'
   }
 };

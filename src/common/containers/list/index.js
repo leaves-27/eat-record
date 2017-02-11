@@ -14,7 +14,6 @@ class List extends Component{
 
   render(){
     const { articles } = this.props;
-    console.log("articles:",articles);
 
     if (!articles || !articles.data) {
       return (<div></div>);

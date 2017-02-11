@@ -15,7 +15,8 @@ import { Provider } from 'react-redux';
 import { renderToString } from 'react-dom/server';
 
 import router from './router';
-import settings from './settings';
+import settingsWrap from './settings';
+const settings = JSON.parse(fs.readFileSync(settingsWrap.settings));
 
 const accessLog = fs.createWriteStream('access.log',{flags:"a"});
 const errorLog = fs.createWriteStream('error.log',{flags:"a"});

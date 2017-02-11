@@ -1,5 +1,7 @@
 import mongodb from "mongodb";
-import settings from "../settings";
+import settingsWrap from "../settings";
+import fs from 'fs';
+const settings = JSON.parse(fs.readFileSync(settingsWrap.settings));
 
 const Db = mongodb.Db;
 const Connection = mongodb.Connection;
