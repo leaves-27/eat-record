@@ -6,7 +6,7 @@
   "license": "ISC",
   "scripts": {
     "mongodb": "mongod --dbpath '/Users/kk/tests/data'",
-    "start": "node ./build/server.js && opener http://localhost:3000",
+    "start": "node ./build/eat-record/server.js && opener http://localhost:3000",
     "build": "webpack --config webpack.server.babel.js && webpack --config webpack.client.babel.js"
   },
   "dependencies": {

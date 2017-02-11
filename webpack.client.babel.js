@@ -3,6 +3,7 @@ var webpack = require('webpack');
 var path = require("path");
 var path = require('path');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
+var fs = require("fs");
 var jsonObj = JSON.parse(fs.readFileSync('./package.json'));
 
 
@@ -56,8 +57,8 @@ module.exports = {
     new ExtractTextPlugin("bundle.css")
   ],
   output: {
-    path: `${__dirname}/${jsonObj.name}/build/static`,
+    path: `${__dirname}/build/${jsonObj.name}/static`,
     filename: 'bundle.js',
-    publicPath:'/static'
+    publicPath:"static"
   }
 };

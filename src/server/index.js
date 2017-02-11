@@ -14,7 +14,6 @@ import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import { renderToString } from 'react-dom/server';
 
-
 import router from './router';
 import settings from './settings';
 
@@ -24,7 +23,6 @@ const MongoStore = connectMongo(sesstion);
 const app = Express();
 const port = 3000;
 const viewPath = path.join(__dirname,'views');
-
 
 app.set('views',viewPath);
 app.set('view engine','ejs');
@@ -59,7 +57,7 @@ app.use(sesstion({
 }));
 app.use(flash());
 
-app.use('/static',Express.static(path.join("", 'build/static')));
+app.use('/static',Express.static(settings.static));
 app.use('/',router);
 
 // error handlers
@@ -75,7 +73,6 @@ if (app.get('env') === 'development') {
     });
   });
 }
-
 // production error handler
 // no stacktraces leaked to user
 app.use(function(err, req, res, next) {
