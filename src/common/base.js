@@ -1,1 +1,0 @@
-console.log("我是公用的js脚步");
