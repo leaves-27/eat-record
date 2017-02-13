@@ -51,9 +51,13 @@ request:
         status:1,
         fieldsets:[]
       }
-
-# 以日期为关键字，每天只能有一条记录
-# 提交时进行验证，并弹出确认框？
+# 尚需解决的问题：
+1、pm2启动的应用找不到view文件；
+3、登录页面添加；
+4、分页；
+5、监控报警；
+git clone https://github.com/harttle/pm2-notify cd pm2-noti
+6、数据库缓存添加；
  
 
 

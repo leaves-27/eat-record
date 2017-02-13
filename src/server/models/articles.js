@@ -26,12 +26,13 @@ Articles.prototype.save = function(callback){
 
 	mongodb.open(function(err,db){
 		if (err) {
+			db.close();
 			return callback(err);
 		};
 		
 		db.collection("articles",function(err,collection){
 			if (err){
-				mongodb.close();
+				db.close();
 				return callback(err);
 			};
 			
@@ -42,7 +43,7 @@ Articles.prototype.save = function(callback){
 			},{
 				upsert:true
 			},function(err){
-				mongodb.close();
+				db.close();
 				if(err) {
 					return callback(err);
 				};
@@ -69,19 +70,20 @@ Articles.prototype.save = function(callback){
 Articles.getAll = function(callback){
 	mongodb.open(function(err,db){
 		if(err){
+			db.close();
 			return callback(err);
 		};
 
 		db.collection('articles',function(err,collection){
 			if (err){
-				mongodb.close();
+				db.close();
 				return callback(err);
 			};
 
 			collection.find().sort({
 				time : -1
 			}).toArray(function(err,docs){
-				mongodb.close();
+				db.close();
 				if (err){
 					return callback(err);
 				};
@@ -113,19 +115,20 @@ Articles.getAll = function(callback){
 Articles.getOne = function(date,callback){
 	mongodb.open(function(err,db){
 		if (err) {
+			db.close();
 			return callback(err);
 		};
 		db.collection("articles",function(err,collection){
 			if(err) {
-				mongodb.close();
+				db.close();
 				return callback(err);
 			};
 
 			collection.findOne({
 				"date" : date
 			},function(err,doc){
+				db.close();
 				if(err) {
-					mongodb.close();
 					return callback(err);
 				};
 

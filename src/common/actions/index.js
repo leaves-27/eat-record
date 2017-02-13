@@ -104,7 +104,7 @@ export function postArticle(key){
   }
 }
 
-export function getList(key) {//key为获取的json节点数据的节点名。
+export function getList(key){//key为获取的json节点数据的节点名。
   return (dispatch, getState) => {
     if(isShouldFetch(getState(),key)) {
       const url = "http://localhost:3000/api/list.json";
@@ -132,16 +132,31 @@ export function getDayDiet(key) {//key为获取的json节点数据的节点名�
   }
 }
 
-// export function getDetail(key) {//key为获取的json节点数据的节点名。
-//   return (dispatch, getState) => {
-//     if(isShouldFetch(getState(),key)) {
-//       const url = "http://localhost:3000/api/list.json";
-//       return dispatch(fetchPosts({
-//         url:url,
-//         key:key
-//       }))
-//     }else{
-//       return Promise.resolve()
-//     }
-//   }
-// }
+export function login(){
+  let key = "login";
+  return (dispatch, getState) => {
+    let state = getState();
+    
+    if(isShouldFetch(state,key)) {
+      const url = "http://localhost:3000/api/login.json";
+      let options = {
+        method:'POST',
+        headers:{
+          'Accept': 'application/json',
+          'Content-Type': 'application/json;charset=utf-8', 
+        },
+        body: JSON.stringify({
+          data:state.user
+        })
+      };
+
+      return dispatch(fetchPosts({
+        url:url,
+        key:key,
+        options:options
+      }))
+    }else{
+      return Promise.resolve()
+    }
+  }
+}

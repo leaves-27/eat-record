@@ -14,16 +14,16 @@ export  function get(state = {},action){
       const initState = {
         status:0,
         fieldsets:[{
-          name:'早餐',
+          name:'标题1',
           groups:[]
         },{
-          name:'中餐',
+          name:'标题2',
           groups:[]
         },{
-          name:'晚餐',
+          name:'标题3',
           groups:[]
         },{
-          name:'其他',
+          name:'标题4',
           groups:[]
         }]
       };
