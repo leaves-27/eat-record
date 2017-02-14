@@ -10,13 +10,27 @@ import List from './containers/list/index';
 import Detail from './containers/detail/index';
 import Backend from './containers/backend/index';
 import Login from './containers/login/index';
+import * as actions from './actions/index';
 
-//import { loginRequireAuth } from '../auth/loginAuth';
+const auth = (state,replace,next) => {
+  actions.loginValidationRequest(replace);
+  next();
+}
 
-const requireAuth = (state, replace) => {
-  console.log("flag:",state.entries["login"].flag);
-  if(!state.entries["login"].flag){
-    replace({ pathname: 'login' });
+function login(login,location){
+  console.log("browserHistory",browserHistory)
+  if(login && login.data && login.data.code == 0){
+    if(location.pathname.indexOf("login") > 0 ){
+      if(location && location.query && location.query.redirectUrl){
+        browserHistory.push(location.query.redirectUrl);
+      }else{
+        browserHistory.push("backend");
+      }
+    }
+  }else{
+    if(location.pathname.indexOf("login") < 0 ){
+      browserHistory.push("login?redirectUrl="+location.query.redirectUrl);
+    }
   }
 }
 
@@ -26,7 +40,7 @@ const routes = () => {
       <IndexRoute  component={ List } />
       <Route path="detail/:id" component={ Detail } />
       <Route path="login" component={ Login } />
-      <Route path="backend" component={ Backend } onEnter={ requireAuth } />
+      <Route path="backend" component={ Backend } onEnter={ auth } />
     </Route>
   )
 };

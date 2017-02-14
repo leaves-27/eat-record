@@ -7,6 +7,7 @@ function Article(){}
 
 
 Article.prototype.get = function(req, res, next){
+  res.header('Access-Control-Expose-Headers', 'access-token');
   let time = Utils.time;
 
   Articles.getOne(time.day,function(err,data){
@@ -17,6 +18,7 @@ Article.prototype.get = function(req, res, next){
       });
     };
 
+    res.header('access-token', Date.now());
     res.json({
       code:0,
       data:data
@@ -25,6 +27,8 @@ Article.prototype.get = function(req, res, next){
 };
 
 Article.prototype.post = function(req, res, next){
+  res.header('Access-Control-Expose-Headers', 'access-token');
+
   let body = req.body;
   let articles = new Articles(body.data);
 
@@ -36,6 +40,7 @@ Article.prototype.post = function(req, res, next){
       });
     };
 
+    res.header('access-token', Date.now());
     res.json({
       code:0,
       msg:"提交成功"

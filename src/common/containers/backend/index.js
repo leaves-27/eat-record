@@ -2,15 +2,17 @@ import React,{ Component,PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as actionType from '../../actions/index';
-import { Link } from 'react-router';
+import { Link,browserHistory } from 'react-router';
 import Group from '../../components/group/index';
 import Message from '../../components/message/index';
 import Modal from '../../components/modal/index';
+import * as Validation from "../../reducer/validation";
 
 class Backend extends Component{
   constructor (props) {
     super(props);
   }
+  
   componentDidMount(){
     const { actions } = this.props;
     actions.getDayDiet("diet");
@@ -48,21 +50,20 @@ class Backend extends Component{
     $(".confirm-btn",$modal).on("click",function(){
       $modal.modal('hide');  
     });
-
-    
   }
   reload(){
     location.reload();
   }
   render(){
-    const { diet,actions,route } = this.props;
-    let _self = this;
+    const { diet,actions,route,login,location } = this.props;
+    
 
+    let _self = this;
     if (!diet || !diet.data || !diet.data.data) {
       return (<div></div>);
     }
-
-    // _self.registerModal();
+    
+    Validation.login(login,location,this);
 
     if(diet.data.data.status && diet.data.data.status == 1){
       return (
@@ -116,7 +117,8 @@ class Backend extends Component{
 
 const mapStateToProps = (state,ownProps) => { //将store中特定的值绑定到子组件上
   return {
-    diet:state.entries.diet
+    diet:state.entries.diet,
+    login:state.entries.login
   };
 };
 
@@ -130,7 +132,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
       deleteDiet : actionType.deleteDiet,
       deleteGroup : actionType.deleteGroup,
       inputGroup : actionType.inputGroup,
-      getDayDiet : actionType.getDayDiet
+      getDayDiet : actionType.getDayDiet,
+      loginValidation : actionType.loginValidation
     },dispatch)
   };
 };

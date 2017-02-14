@@ -16,6 +16,9 @@ import { renderToString } from 'react-dom/server';
 
 import router from './router';
 import settingsWrap from './settings';
+// import auth from './auth';
+import err from './err';
+
 const settings = JSON.parse(fs.readFileSync(settingsWrap.settings));
 
 const accessLog = fs.createWriteStream('access.log',{flags:"a"});
@@ -41,7 +44,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(cookieParser());
-
 app.use(sesstion({
   saveUninitialized : false,
   resave : true,
@@ -56,9 +58,10 @@ app.use(sesstion({
     port:settings.port
   })
 }));
-app.use(flash());
+
 
 app.use('/static',Express.static(settings.static));
+// app.use(auth);
 app.use('/',router);
 
 // error handlers
@@ -76,12 +79,6 @@ if (app.get('env') === 'development') {
 }
 // production error handler
 // no stacktraces leaked to user
-app.use(function(err, req, res, next) {
-  res.status(err.status || 500);
-  res.render('error',{
-    message: err.message,
-    error: {}
-  });
-});
+app.use(err);
 
 app.listen(port);

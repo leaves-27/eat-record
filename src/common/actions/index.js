@@ -1,6 +1,8 @@
 import { createConstants } from '../utils';
 import { fetchPosts,isShouldFetch } from './network';
 
+//域名
+export const prefixUrl = "http://localhost:3000/"
 //action类型
 export const actionTypesApp = createConstants(
   'ADD_GROUP',
@@ -11,7 +13,8 @@ export const actionTypesApp = createConstants(
   'BACK',
   'GET_DETAIL',
   'NEXT',
-  'DELETE_DIET'
+  'DELETE_DIET',
+  'CHANGE_USER'
 );
 
 //action创建函数
@@ -32,6 +35,15 @@ export function inputGroup(pIndex,cIndex,_this){
   }
 }
 
+
+export function changeUser(_this){
+  return {
+    type:actionTypesApp.CHANGE_USER,
+    target:_this.target
+  }
+}
+
+
 export function deleteGroup(pIndex,cIndex){
   return {
     type:actionTypesApp.DELETE_GROUP,
@@ -39,7 +51,6 @@ export function deleteGroup(pIndex,cIndex){
     cIndex:cIndex
   }
 }
-
 
 export function addFieldset(index){
   return {
@@ -68,25 +79,23 @@ export function updateStatus(status){
   }
 }
 
-
 export function deleteDiet(status){
   return {
     type:actionTypesApp.DELETE_DIET
   }
 }
 
-
 export function postArticle(key){
   return (dispatch, getState) => {
     let state = getState();
     
     if(isShouldFetch(state,key)) {
-      const url = "http://localhost:3000/api/article.json";
+      const url = prefixUrl+"api/article.json";
       let options = {
         method:'POST',
         headers:{
           'Accept': 'application/json',
-          'Content-Type': 'application/json;charset=utf-8', 
+          'Content-Type': 'application/json;charset=utf-8'
         },
         body: JSON.stringify({
           data:state.entries.diet.data.data.fieldsets
@@ -107,7 +116,7 @@ export function postArticle(key){
 export function getList(key){//key为获取的json节点数据的节点名。
   return (dispatch, getState) => {
     if(isShouldFetch(getState(),key)) {
-      const url = "http://localhost:3000/api/list.json";
+      const url = prefixUrl+"api/list.json";
       return dispatch(fetchPosts({
         url:url,
         key:key
@@ -121,7 +130,7 @@ export function getList(key){//key为获取的json节点数据的节点名。
 export function getDayDiet(key) {//key为获取的json节点数据的节点名。
   return (dispatch, getState) => {
     if(isShouldFetch(getState(),key)) {
-      const url = "http://localhost:3000/api/article.json";
+      const url = prefixUrl+"api/article.json";
       return dispatch(fetchPosts({
         url:url,
         key:key
@@ -132,13 +141,41 @@ export function getDayDiet(key) {//key为获取的json节点数据的节点名�
   }
 }
 
-export function login(){
+export function postLogin(){
   let key = "login";
   return (dispatch, getState) => {
     let state = getState();
     
     if(isShouldFetch(state,key)) {
-      const url = "http://localhost:3000/api/login.json";
+      const url = prefixUrl+"api/login.json";
+      let options = {
+        method:'POST',
+        headers:{
+          'Accept': 'application/json',
+          'Content-Type': 'application/json;charset=utf-8', 
+        },
+        body: JSON.stringify({
+          data:state.user
+        })
+      };
+
+      return dispatch(fetchPosts({
+        url:url,
+        key:key,
+        options:options
+      }))
+    }else{
+      return Promise.resolve()
+    }
+  }
+}
+
+export function loginValidationRequest(login,location){
+  let key = "login";
+  return (dispatch, getState) => {
+    let state = getState();
+    if(isShouldFetch(state,key)) {
+      const url = prefixUrl+"api/validation.json";
       let options = {
         method:'POST',
         headers:{

@@ -1,6 +1,6 @@
 import React from 'react';
 import { renderToString } from 'react-dom/server';
-import { match ,RouterContext} from 'react-router';
+import { match , RouterContext } from 'react-router';
 import { Provider } from 'react-redux';
 import { combineReducers } from 'redux';
 
@@ -12,7 +12,8 @@ import middlewareConfig from '../../common/middleware-config';
 function Home(){}
 
 Home.prototype.get = function(req, res, next){
-  const store = middlewareConfig(about);
+  const initState = {};
+  const store = middlewareConfig(about,initState);
 
   match({
     routes: routes(store.getState()), 
