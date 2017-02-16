@@ -9,56 +9,50 @@ import Message from '../../components/message/index';
 class List extends Component{
   componentDidMount(){
     const { actions } = this.props;
-    actions.getList("articles");
+    // actions.getList("articles");
   }
 
   render(){
     const { articles } = this.props;
 
-    if (!articles || !articles.data) {
-      return (<div></div>);
-    };
-
-    console.log("articles11:",articles);
-    
-
-    if(articles.data.code==0){
-      let list = "";
-
-      if (articles.data.data.length > 0) {
-        list = articles.data.data.map(function(item,index){
-          let link = "/web/detail/" +index;
-
-          return (
-            <li key={index} className="list-group-item">
-              <Link to={link}>{item.date}</Link>
-            </li>
-          );
-        });
-      }else{
-        list = (
-          <Message msg="没有列表信息。" />
-        );
-      }
-
-      return (
-        <div>
-          <h2>标题：</h2>
-          <ul className="list-group">{ list }</ul>
-        </div>
-      )
-    }else{
+    if(!articles || !articles.data || articles.data.code!=0){
       return (
         <Message msg="数据获取失败，请稍后刷新页面重新获取数据" />
-      )
+      ) 
     }
+
+    let list = "";
+    if (articles.data.data.length > 0) {
+      list = articles.data.data.map(function(item,index){
+        let link = "/web/detail/" +index;
+
+        return (
+          <li key={index} className="list-group-item">
+            <Link to={link}>{item.date}</Link>
+          </li>
+        );
+      });
+    }else{
+      list = (
+        <li>
+          <Message msg="没有列表信息。" />
+        </li>
+      );
+    }
+
+    return (
+      <div>
+        <h2>标题：</h2>
+        <ul className="list-group">{ list }</ul>
+      </div>
+    )
     
   }
 };
 
 const mapStateToProps = (state,ownProps) => { //将store中特定的值绑定到子组件上
   return {
-    articles:state.entries.articles
+    articles:state.articles
   };
 };
 

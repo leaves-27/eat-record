@@ -1,12 +1,14 @@
 import React,{ Component,PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import * as actionType from '../../actions/index';
-import { Link,browserHistory } from 'react-router';
+import { Link } from 'react-router';
+
 import Group from '../../components/group/index';
 import Message from '../../components/message/index';
 import Modal from '../../components/modal/index';
-import * as Validation from "../../reducer/validation";
+
+import * as actionType from '../../actions/index';
+import * as asyncAction from '../../actions/async';
 
 class Backend extends Component{
   constructor (props) {
@@ -35,6 +37,7 @@ class Backend extends Component{
 
     return fieldsets;
   }
+  
   next(){
     const { actions } = this.props;
     //对用户创建的输入框进行验证。若没有输入，触发表单的错误提示
@@ -42,7 +45,7 @@ class Backend extends Component{
     let $modal = $('#myModal');
     $(".modal-body p",$modal).text("你确定你要提交吗？");
     $modal.on("hidden.bs.modal",function(e){
-      actions.postArticle("post_article");
+      actions.postArticle("diet");
     });
     $modal.modal({
       show:true
@@ -55,17 +58,20 @@ class Backend extends Component{
     location.reload();
   }
   render(){
-    const { diet,actions,route,login,location } = this.props;
-    
-
+    const { diet,actions } = this.props;
     let _self = this;
-    if (!diet || !diet.data || !diet.data.data) {
-      return (<div></div>);
-    }
-    
-    Validation.login(login,location,this);
 
-    if(diet.data.data.status && diet.data.data.status == 1){
+    if (!diet || !diet.data || !diet.data.code!=0) {
+      return (
+        <Message msg="数据获取失败，请稍后刷新页面重新获取数据" />
+      )
+    }
+
+    if (diet.data.code == 1) {
+      return (<Message msg={diet.msg}/>);
+    }
+
+    if(diet.data.status && diet.data.status ==1){
       return (
         <div className="text-center btn-box">
           <div className="row">
@@ -117,8 +123,7 @@ class Backend extends Component{
 
 const mapStateToProps = (state,ownProps) => { //将store中特定的值绑定到子组件上
   return {
-    diet:state.entries.diet,
-    login:state.entries.login
+    diet:state.diet
   };
 };
 
@@ -127,13 +132,10 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     actions: bindActionCreators({
       addFieldset : actionType.addFieldset,
       addGroup : actionType.addGroup,
-      updateStatus : actionType.updateStatus,
-      postArticle : actionType.postArticle,
-      deleteDiet : actionType.deleteDiet,
       deleteGroup : actionType.deleteGroup,
       inputGroup : actionType.inputGroup,
-      getDayDiet : actionType.getDayDiet,
-      loginValidation : actionType.loginValidation
+      getDayDiet : asyncAction.getDayDiet,
+      postArticle : asyncAction.postArticle
     },dispatch)
   };
 };

@@ -31,26 +31,29 @@
 request:
 
 # state
-  entities:
-    article:
-      isFetching: false,
-      didInvalidate: false,
-      lastUpdated:"",
-      pageCount:0,
-      pageSize:0,
-      currentNo:1,
-      data:[]
-    diet:
-      isFetching: false,
-      didInvalidate: false,
-      lastUpdated:"",
-      pageCount:0,
-      pageSize:0,
-      currentNo:1,
-      data:{
-        status:1,
+
+  articles:
+    data:
+      code:
+      data:
+        date:
         fieldsets:[]
-      }
+  diet:
+    data:
+      code:
+      data:
+        fieldsets:[]
+      status:
+        
+  login:
+    data:
+      user:
+        name:
+        password:
+      code:
+      data:
+
+    
 # 尚需解决的问题：
 1、pm2启动的应用找不到view文件；
 3、登录页面添加；

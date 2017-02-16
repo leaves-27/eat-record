@@ -1,27 +1,46 @@
 import express from 'express';
-import Home from './controller/home';
-import List from './api/list';
-import Article from './api/article';
+
+import { loginGet } from './controller/login';
+import { backendGet } from './controller/backend';
+import { listGet } from './controller/list';
+import { detailGet } from './controller/detail';
+
+import { validationPage } from './middleware/validation';
+import { validationApi } from './api/validation';
+
+import Backend from './api/backend';
 import Login from './api/login';
+import * as asyncAction from '../common/actions/async';
+// import { render } from './render';
 
 const router = express.Router();
 
-const home = new Home();
-router.get('/web/*',home.get);
+let backend = new Backend();
+let login = new Login();
 
-const list = new List();
-router.get('/api/list.json',list.get);
+//页面级验证及其响应
+router.get('/web/login',loginGet);
+
+router.get('/web/backend',validationPage);
+router.get('/web/backend',backendGet);
+
+router.get('/web/',listGet);
+router.get('/web/detail:id',detailGet);
+
+//接口级验证及响应
+router.post('/api/login',login.post);
+
+router.get('/api/backend',validationApi);
+router.get('/api/backend',backend.get);
+router.post('/api/backend',validationApi);
+router.post('/api/backend',backend.post);
 
 
-const login = new Login();
-router.post('/api/login.json',login.post);
-router.post('/api/validation.json',login.validate);
 
-const article = new Article();
-router.post('/api/article.json',article.post);
-router.get('/api/article.json',article.get);
+// router.get('/web/list',validate.page);
 
 
+// router.get('/web/detail:id',validate.page);
 
 
 module.exports = router;

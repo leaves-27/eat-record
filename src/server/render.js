@@ -4,19 +4,19 @@ import { match , RouterContext } from 'react-router';
 import { Provider } from 'react-redux';
 import { combineReducers } from 'redux';
 
-import routes from '../../common/router';
-import { about } from '../../common/reducer/index';
+import routes from '../common/router';
+import { about } from '../common/reducer/index';
 
-import middlewareConfig from '../../common/middleware-config';
+import middlewareConfig from '../common/middleware-config';
 
-function Home(){}
-
-Home.prototype.get = function(req, res, next){
-  const initState = {};
+export function render(req,res,next,initState){
+  console.log();
+  
   const store = middlewareConfig(about,initState);
-
+  const state = store.getState();
+  
   match({
-    routes: routes(store.getState()), 
+    routes: routes(state),
     location: req.url
   },function(err, redirectLocation, renderProps){
     if(err){
@@ -29,15 +29,13 @@ Home.prototype.get = function(req, res, next){
           <RouterContext {...renderProps} />
         </Provider>
       );
-      
+
       res.render('index',{
         __html__: html,
-        __state__: JSON.stringify(store.getState())
+        __state__: JSON.stringify(state)
       });
     }else{
       res.status(404).end('Not found');
     }
   });
-};
-
-module.exports = Home;
+}

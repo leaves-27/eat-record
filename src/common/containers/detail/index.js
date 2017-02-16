@@ -1,9 +1,12 @@
 import React,{ Component,PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import * as actionType from '../../actions/index';
+
 import Group from '../../components/group/index';
 import Message from '../../components/message/index';
+
+import * as actionType from '../../actions/index';
+import * as asyncAction from '../../actions/async';
 
 class Detail extends Component{
   componentDidMount(){
@@ -24,16 +27,8 @@ class Detail extends Component{
   render(){
     const { articles,actions } = this.props;
     let _self = this;
-    
 
-    if (!articles || !articles.data){
-      return (
-        <div></div>
-      )
-    };
-
-    if(articles.data.code!=0){
-      //数据获取失败，请稍后刷新页面重新获取数据
+    if(!articles || !articles.data || articles.data.code!=0){
       return (
         <Message msg="数据获取失败，请稍后刷新页面重新获取数据" />
       )
@@ -67,15 +62,14 @@ class Detail extends Component{
 
 const mapStateToProps = (state,ownProps) => { //将store中特定的值绑定到子组件上
   return {
-    articles:state.entries.articles
+    articles:state.articles
   };
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     actions: bindActionCreators({
-      getList:actionType.getList,
-      getBack:actionType.getBack
+      getList:asyncAction.getList
     },dispatch)
   };
 };

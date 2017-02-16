@@ -1,30 +1,24 @@
-import { actionTypesApp } from '../actions/index';
-import { REQUEST_POSTS , RECEIVE_POSTS } from '../actions/network';
+import { actionTypesApp } from '../../actions/index';
+import { REQUEST_POSTS , RECEIVE_POSTS } from '../../actions/network';
 
-import { get } from './get';
-
-import { request , getPreHanlder } from './request';
-import { post } from './post';
+import { request , getPreHanlder } from '../common/request';
+import { get } from '../get';
+import { post } from '../post';
 
 import { addGroup , deleteGroup, inputGroup } from './group';
 
-export function entries(state = {} ,action){
+export function diet(state = {} ,action){
   switch (action.type){
     case REQUEST_POSTS:
-
-      return Object.assign({},state,{
-        [action.key]: request(state[action.key],action)
-      });
+      return request(state,action);
       
     case RECEIVE_POSTS:
-      if(action.method=="POST") {
+      if(action.method=="POST"){
         return post(state,action)
       }else{
-        return Object.assign({},state,{
-          [action.key]: request(state[action.key],action,get)
-        });
+        return request(state,action,get);
       }
-      
+
     case actionTypesApp.ADD_GROUP:
 
       return getPreHanlder(state,action,"diet",addGroup);

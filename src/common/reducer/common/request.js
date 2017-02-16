@@ -1,16 +1,15 @@
 /*
-** 每个网络请求的state是必须设计为如下方式，且reduce的RECEIVE_POSTS的state设计和action的处理不一致:
+** 该方法用于对网络请求返回的数据格式的统一封装。每个网络请求返回的state是必须设计为如下方式：
 ** isFetching： 
 ** didInvalidate：
 ** lastUpdated：
 ** data:
 **/
 
-import { REQUEST_POSTS ,RECEIVE_POSTS } from '../actions/network';
+import { REQUEST_POSTS ,RECEIVE_POSTS } from '../../actions/network';
 
 export function request(state = {}, action,callback){
-  
-  switch (action.type) {
+  switch (action.type){
     case REQUEST_POSTS:
 
       return Object.assign({}, state, {

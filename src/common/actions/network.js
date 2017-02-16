@@ -41,15 +41,12 @@ export function fetchPosts(params) {
 
   return dispatch => {
     dispatch(requestPosts(key,options));
-    let headers;
-    if(options.headers) {
-      headers = Object.assign({},options.headers,{
-        'Access-Token': sessionStorage.getItem('access_token')
-      });
-      options.headers = headers;
-    }
+
+    let temOpts = Object.assign({},options,{
+      credentials:'include'
+    });
     
-    return fetch(url,options)
+    return fetch(url,temOpts)
       .then(res => {
         return res.json();
       })
@@ -60,12 +57,10 @@ export function fetchPosts(params) {
 export function isShouldFetch(state,key) {
   const data = state[key];
 
-  if(!data) { //所要获取的数据不存在，则去发送获取请求
-    return true
-  }else if(data.isFetching){//所要获取的数据正在获取中，则放弃发送获取请求
+  if(data.isFetching){ //所要获取的数据正在获取中，则放弃发送获取请求
     return false
   }else {
-    return data.didInvalidate //判断获取的数据是否过期，若过期则重新获取；否则放弃重新获取。
+    return true //判断获取的数据是否过期，若过期则重新获取；否则放弃重新获取。
   }
 }
 

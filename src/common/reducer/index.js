@@ -1,13 +1,14 @@
 import { combineReducers } from 'redux';
 
-import { entries } from './entries';
-import { user } from './user';
+import { articles } from './articles/articles';
+import { login } from './login/login';
+import { diet } from './diet/diet';
 
-
-export function about(state = {} ,action){
+export function about(state = {} , action){
   return {
-    entries : entries(state.entries,action),
-    user : user(state.user,action)
+    articles : articles(state.articles,action), 
+    diet : diet(state.diet,action),
+    login : login(state.login,action)
   }
 }
 

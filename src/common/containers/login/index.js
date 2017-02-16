@@ -1,17 +1,15 @@
 import React,{ Component,PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Link,browserHistory } from 'react-router';
 
 import * as actionType from '../../actions/index';
+import * as asyncAction from '../../actions/async';
 import Message from '../../components/message/index';
-import * as Validation from "../../reducer/validation";
+// import * as Validation from "../../reducer/validation";
 
 class Login extends Component{
   render(){
-    const { actions,login,location } = this.props;
-    Validation.login(login,location,this);
-
+    const { actions,login } = this.props;
     return (
       <div className="dialog">
         <div className="panel panel-default">
@@ -34,7 +32,7 @@ class Login extends Component{
               </div>
               <div className="form-group">
                 <div className="col-sm-offset-2 col-sm-10">
-                  <button type="submit" className="btn btn-default" onClick={ actions.postLogin }>登陆</button>
+                  <button type="button" className="btn btn-default" onClick={ actions.postLogin }>登陆</button>
                 </div>
               </div>
             </form>
@@ -47,17 +45,15 @@ class Login extends Component{
 
 const mapStateToProps = (state,ownProps) => { //将store中特定的值绑定到子组件上
   return {
-    user:state.user,
-    login:state.entries.login
+    login:state.login
   };
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     actions: bindActionCreators({
-      postLogin:actionType.postLogin,
-      changeUser:actionType.changeUser,
-      loginValidation:actionType.loginValidation
+      postLogin:asyncAction.postLogin,
+      changeUser:actionType.changeUser
     },dispatch)
   };
 };

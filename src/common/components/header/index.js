@@ -20,7 +20,7 @@ export default class Header extends Component{
           </div>
           <div className="navbar-collapse collapse" role="navigation">
             <ul className="nav navbar-nav navbar-right hidden-sm">
-              <li><a href="/web/backend">登陆</a></li>
+              <li><a href="/web/login">登陆</a></li>
             </ul>
           </div>
         </div>
