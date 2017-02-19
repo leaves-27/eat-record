@@ -5,8 +5,11 @@ import { render } from '../render';
 export function loginGet(req, res, next){
   render(req,res,next,{
     login:{
-      data:{
-        code:0
+      request:{
+        status:0,
+        data:{
+          code:0
+        }
       }
     }
   });

@@ -1,6 +1,8 @@
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { match , RouterContext } from 'react-router';
+import { createMemoryHistory,createHistory,useBasename } from 'history'
+
 import { Provider } from 'react-redux';
 import { combineReducers } from 'redux';
 
@@ -9,8 +11,11 @@ import { about } from '../common/reducer/index';
 
 import middlewareConfig from '../common/middleware-config';
 
+// let appHistory  = useBasename(createHistory)({
+//   basename: '/web'
+// })
+
 export function render(req,res,next,initState){
-  console.log();
   
   const store = middlewareConfig(about,initState);
   const state = store.getState();

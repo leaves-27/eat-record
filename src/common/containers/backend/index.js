@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 
+import Header from '../../components/header/index';
 import Group from '../../components/group/index';
 import Message from '../../components/message/index';
 import Modal from '../../components/modal/index';
@@ -57,36 +58,24 @@ class Backend extends Component{
   reload(){
     location.reload();
   }
-  render(){
-    const { diet,actions } = this.props;
+  getStep2(){
     let _self = this;
-
-    if (!diet || !diet.data || !diet.data.code!=0) {
-      return (
-        <Message msg="数据获取失败，请稍后刷新页面重新获取数据" />
-      )
-    }
-
-    if (diet.data.code == 1) {
-      return (<Message msg={diet.msg}/>);
-    }
-
-    if(diet.data.status && diet.data.status ==1){
-      return (
-        <div className="text-center btn-box">
-          <div className="row">
-            <div className="col-sm-6">
-              <button type="button" className="btn btn-success btn-block" onClick={ _self.reload }>继续</button>
-            </div>
-            <div className="col-sm-6">
-              <Link to="/web/" className="btn btn-danger btn-block">查看提交</Link>
-            </div>
+    return (
+      <div className="text-center btn-box">
+        <div className="row">
+          <div className="col-sm-6">
+            <button type="button" className="btn btn-success btn-block" onClick={ _self.reload }>继续</button>
+          </div>
+          <div className="col-sm-6">
+            <Link to="/web/" className="btn btn-danger btn-block">查看提交</Link>
           </div>
         </div>
-      );
-    }
-
-    const newFieldset = diet.data.data.fieldsets.map(function(item,index){
+      </div>
+    )
+  }
+  getNewFieldset(fieldsets,actions){
+    let _self = this;
+    const newFieldsets = fieldsets.map(function(item,index){
       let groups = [];
 
       for(let i=0; i< item.groups.length; i++){
@@ -103,11 +92,17 @@ class Backend extends Component{
       );
     });
 
-    return(
-      <div className="backend">
+    return newFieldsets;
+  }
+  getStep1(login,fieldsets,actions){
+
+    let _self = this;
+
+    return (
+      <div>
         <form className="form-horizontal backend">
           <div className="fieldsets">
-            { newFieldset }
+            { _self.getNewFieldset(fieldsets,actions) }
           </div>
           <div className="control-group">
             <div className="controls">
@@ -119,11 +114,42 @@ class Backend extends Component{
       </div>
     )
   }
+  render(){
+    const { login,diet,actions } = this.props;
+    let _self = this;
+    let result;
+
+    console.log("yy");
+
+    if (!diet || !diet.request || !diet.request.data || diet.request.data.code!=0) {
+      let msg = "数据获取失败，请稍后刷新页面重新获取数据";
+
+      if(diet && diet.data) {
+        msg = diet.data.msg; 
+      }
+
+      result = (
+        <Message msg={ msg } />
+      )
+    }else if(diet.request.status && diet.request.status ==1){
+      result = this.getStep2();
+    }else{
+      result = this.getStep1(login,diet.request.data.data.fieldsets,actions);
+    }
+
+    return (
+      <div className="backend">
+        <Header login={ login } />
+        { result }
+      </div>
+    );
+  }
 };
 
 const mapStateToProps = (state,ownProps) => { //将store中特定的值绑定到子组件上
   return {
-    diet:state.diet
+    diet : state.diet,
+    login : state.login
   };
 };
 

@@ -1,15 +1,20 @@
 import React,{ Component,PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { Link } from 'react-router';
 
 import * as actionType from '../../actions/index';
 import * as asyncAction from '../../actions/async';
+
+import Header from '../../components/header/index';
 import Message from '../../components/message/index';
 // import * as Validation from "../../reducer/validation";
 
 class Login extends Component{
-  render(){
-    const { actions,login } = this.props;
+  constructor(props, context) {
+    super(props, context);
+  }
+  getLoginBox(actions){
     return (
       <div className="dialog">
         <div className="panel panel-default">
@@ -39,6 +44,28 @@ class Login extends Component{
           </div>
         </div>
       </div>
+    )
+  }
+  render(){
+    const { actions,login } = this.props;
+    let result;
+
+    if (login && login.request && login.request.status==1) {
+      result = (
+        <div className="text-center login-success">
+          登录成功，去<Link to="/web/backend">创建文章</Link>
+        </div>
+      );
+    }else{
+      result = this.getLoginBox(actions)
+    }
+
+    return (
+      <div className>
+        <Header login={ login } />
+        { result }
+      </div>
+      
     )
   }
 };

@@ -33,7 +33,7 @@ export function postArticle(key){
 export function getList(key){//key为获取的json节点数据的节点名。
   return (dispatch, getState) => {
     if(isShouldFetch(getState(),key)) {
-      const url = prefixUrl+"api/list.json";
+      const url = prefixUrl+"api/list";
       return dispatch(fetchPosts({
         url:url,
         key:key

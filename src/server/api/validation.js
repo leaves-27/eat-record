@@ -12,10 +12,7 @@ export function validationApi(req, res, next){
         });
       };
       
-      res.json({
-        code:0,
-        data:user
-      });
+      next();
     });
   }else{
     res.json({

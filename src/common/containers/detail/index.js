@@ -2,6 +2,7 @@ import React,{ Component,PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
+import Header from '../../components/header/index';
 import Group from '../../components/group/index';
 import Message from '../../components/message/index';
 
@@ -13,7 +14,23 @@ class Detail extends Component{
     const { actions } = this.props;
     actions.getList("articles");
   }
-  countGroups(groups){
+  getNewFieldset(fieldsets){
+    let _self = this;
+    const newFieldset = fieldsets.map(function(item,index){
+      return (
+        <fieldset key={ "fieldset_"+index }>
+          <h3>{ item.name } </h3>
+          <table className="table table-bordered">
+            <tbody>
+              { _self.getGroups(item.groups) }
+            </tbody>
+          </table>
+        </fieldset>
+      );
+    });
+    return newFieldset;
+  }
+  getGroups(groups){
     let newGroups = groups.map(function(item,index){
       return (
         <tr key={ index }>
@@ -24,45 +41,44 @@ class Detail extends Component{
     });
     return newGroups;
   }
-  render(){
-    const { articles,actions } = this.props;
-    let _self = this;
-
-    if(!articles || !articles.data || articles.data.code!=0){
-      return (
-        <Message msg="数据获取失败，请稍后刷新页面重新获取数据" />
-      )
-    }
-
-    let id = this.props.params.id;
-    let fieldsets = articles.data.data[this.props.params.id].fieldsets;
-
-    const newFieldset = fieldsets.map(function(item,index){
-      return (
-        <fieldset key={ "fieldset_"+index }>
-          <h3>{ item.name } </h3>
-          <table className="table table-bordered">
-            <tbody>
-              { _self.countGroups(item.groups) }
-            </tbody>
-          </table>
-        </fieldset>
-      );
-    });
+  getStep2(articles,index){
+    let fieldsets = this.getNewFieldset(articles.data.data[index].fieldsets);
 
     return ( 
       <div className="form-horizontal">
         <div className="fieldsets">
-          { newFieldset }
+          { fieldsets }
         </div>
       </div>
-    );    
+    )
+  }
+  render(){
+    let _self = this;
+    let result;
+
+    const { articles,login } = this.props;
+
+    if(!articles || !articles.data || articles.data.code!=0){
+      result = (
+        <Message msg="数据获取失败，请稍后刷新页面重新获取数据" />
+      )
+    }else{
+      result = this.getStep2(articles,this.props.params.id);
+    }
+
+    return (
+      <div className="detail">
+        <Header login={ login } />
+        { result }
+      </div>
+    );  
   }
 };
 
 const mapStateToProps = (state,ownProps) => { //将store中特定的值绑定到子组件上
   return {
-    articles:state.articles
+    articles:state.articles,
+    login : state.login
   };
 };
 

@@ -8,7 +8,7 @@
 
 import { REQUEST_POSTS ,RECEIVE_POSTS } from '../../actions/network';
 
-export function request(state = {}, action,callback){
+export function callbackPreHanlder(state = {}, action , callback){
   switch (action.type){
     case REQUEST_POSTS:
 
@@ -18,14 +18,14 @@ export function request(state = {}, action,callback){
       });
       
     case RECEIVE_POSTS:
-      const data = callback(state.data,action);
-      
-      return Object.assign({}, state, {
+
+      const result = Object.assign({},{
         isFetching: false,
         didInvalidate: false,
-        lastUpdated: action.receivedAt,
-        data: data
-      });
+        lastUpdated: action.receivedAt
+      },callback(state,action));
+      
+      return Object.assign({}, state , result);
 
     default:
       return state

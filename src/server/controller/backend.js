@@ -11,9 +11,12 @@ export function backendGet (req, res, next){
     if(err){
       initState = {
         diet:{
-          data:{
-            code : 1,
-            msg : err
+          request:{
+            status:0,
+            data:{
+              code : 1,
+              msg : err
+            }
           }
         }
       }
@@ -39,9 +42,12 @@ export function backendGet (req, res, next){
 
     initState = {
       diet:{
-        data:{
-          code:0,
-          data:data
+        request:{
+          status:0,
+          data:{
+            code:0,
+            data:data
+          }
         }
       }
     };

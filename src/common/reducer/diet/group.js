@@ -1,5 +1,5 @@
 export function addGroup(state,action){
-  let fieldsets = state.data.data.fieldsets.map(function(item,index){
+  let fieldsets = state.map(function(item,index){
     let result = JSON.parse(JSON.stringify(item));
 
     if(index == action.index) {
@@ -12,17 +12,11 @@ export function addGroup(state,action){
     return result;
   });
 
-  return {
-    code:state.data.code,
-    data:{
-      fieldsets:fieldsets,
-      status:state.data.data.status
-    }
-  };
+  return fieldsets;
 }
 
 export function deleteGroup(state,action){
-  let fieldsets = state.data.data.fieldsets.map(function(item,index){
+  let fieldsets = state.map(function(item,index){
     let result = JSON.parse(JSON.stringify(item));
 
     if(index == action.pIndex){
@@ -32,17 +26,11 @@ export function deleteGroup(state,action){
     return result;
   });
 
-  return {
-    code:state.data.code,
-    data:{
-      fieldsets:fieldsets,
-      status:state.data.data.status
-    }
-  };
+  return fieldsets;
 }
 
 export function inputGroup(state,action){
-  let fieldsets = state.data.data.fieldsets.map(function(item,index){
+  let fieldsets = state.map(function(item,index){
     let result = JSON.parse(JSON.stringify(item));
 
     if(index == action.pIndex){
@@ -65,11 +53,5 @@ export function inputGroup(state,action){
     return result;
   });
 
-  return {
-    code : state.data.code,
-    data : {
-      fieldsets : fieldsets,
-      status : state.data.data.status
-    }
-  };
+  return fieldsets;
 }

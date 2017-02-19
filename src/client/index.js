@@ -1,7 +1,8 @@
 import React from 'react';
 import { render } from "react-dom";
 import { Provider } from 'react-redux';
-import { Router,browserHistory,match} from 'react-router';
+import { Router,match,browserHistory} from 'react-router';
+import { createBrowserHistory } from 'history'
 
 import { about } from '../common/reducer/index';
 import middlewareConfig from '../common/middleware-config';
