@@ -1,7 +1,7 @@
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { match , RouterContext } from 'react-router';
-import { createMemoryHistory } from 'history';
+import { createHistory } from 'history';
 import { Provider } from 'react-redux';
 import { combineReducers } from 'redux';
 
@@ -12,7 +12,7 @@ import * as page  from './page';
 import { about } from '../common/reducer/index';
 
 export const web=(req,res,next)=>{
-  const history = createMemoryHistory();
+  const history = createHistory();
   const routes = createRoutes(history);
   const location = history.createLocation(req.url);
   

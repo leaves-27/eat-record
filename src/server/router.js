@@ -9,8 +9,6 @@ const router = express.Router();
 let login = new Login();
 let article = new Article();
 
-console.log("router:",router);
-
 //页面级验证及其响应
 router.get('/web/*',web);
 
