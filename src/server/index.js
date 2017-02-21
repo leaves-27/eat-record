@@ -16,8 +16,7 @@ import { renderToString } from 'react-dom/server';
 
 import router from './router';
 import settingsWrap from './settings';
-// import auth from './auth';
-import err from './err';
+import { error } from './page';
 
 const settings = JSON.parse(fs.readFileSync(settingsWrap.settings));
 
@@ -65,20 +64,21 @@ app.use('/static',Express.static(settings.static));
 app.use('/',router);
 
 // error handlers
+app.use(function(req, res, next) {
+  res.status(200).end("404");
+});
 
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
   app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
-    res.render('error', {
-      message: err.message,
-      error: err
-    });
+    res.status(err.status || 500).end(error(err.message,err));
   });
 }
 // production error handler
 // no stacktraces leaked to user
-app.use(err);
+app.use(function(err, req, res, next) {
+  res.status(err.status).end(error(err.message,err));
+});
 
 app.listen(port);

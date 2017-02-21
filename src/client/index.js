@@ -23,7 +23,7 @@ match({
 }, (error, redirectLocation, renderProps) => {
   render(
     <Provider store={store}>
-      <Router {...renderProps}/>
+      <RouterContext {...renderProps} />
     </Provider>,
     document.getElementById('root')
   )

@@ -6,6 +6,8 @@ import { Link } from 'react-router';
 import Header from '../../components/header/index';
 import Group from '../../components/group/index';
 import Message from '../../components/message/index';
+import Utils from '../../utils';
+
 import Modal from '../../components/modal/index';
 
 import * as actionType from '../../actions/index';
@@ -18,7 +20,7 @@ class Backend extends Component{
   
   componentDidMount(){
     const { actions } = this.props;
-    actions.getDayDiet("diet");
+    actions.getDetail("diet",Utils.time.day);
   }
 
   getFieldset(temp){

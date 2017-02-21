@@ -37,14 +37,16 @@ import Login from './containers/login/index';
 //   }
 // }
 
-const routes = () => {
+const routes = (history) => {
   return (
-    <Route path="web" component={App}>
-      <IndexRoute  component={ List } />
-      <Route path="detail/:id" component={ Detail } />
-      <Route path="login" component={ Login } />
-      <Route path="backend" component={ Backend } />
-    </Route>
+    <Router history={history}>
+      <Route path="web" component={App}>
+        <IndexRoute  component={ List } />
+        <Route path="detail/:id" component={ Detail } />
+        <Route path="login" component={ Login } />
+        <Route path="backend" component={ Backend } />
+      </Route>
+    </Router>
   )
 };
 

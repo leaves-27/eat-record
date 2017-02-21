@@ -11,10 +11,16 @@ export const actionTypesApp = createConstants(
   'GET_DETAIL',
   'NEXT',
   'DELETE_DIET',
-  'CHANGE_USER'
+  'CHANGE_USER',
+  'RESET_STATE'
 );
 
 //action创建函数
+export function resetState(index){
+  return {
+    type:actionTypesApp.RESET_STATE
+  }
+}
 
 export function addGroup(index){
   return {
