@@ -2,7 +2,7 @@ import { REQUEST_POSTS ,RECEIVE_POSTS } from '../../actions/network';
 import { requestFn } from '../common/request';
 import { initFieldsets,getDataDataHanlder } from '../common/common';
 
-export function detail(state={},action){
+export default function detail(state={},action){
   if(action.key!="detail"){
     return state;
   }

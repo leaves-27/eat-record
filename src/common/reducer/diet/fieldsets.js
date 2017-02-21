@@ -43,7 +43,7 @@ const userInput = (state={},action)=>{
 *   data : []
 * }
 **/
-export function fieldsets(state={},action){
+export default function fieldsets(state={},action){
   if(action.key!="diet") {
     return state;
   }

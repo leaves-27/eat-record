@@ -24,12 +24,8 @@ export default (req,res,next)=>{
     }else if(redirectLocation){
       res.redirect(redirectLocation.pathname + redirectLocation.search);
     }else if(renderProps){
-      console.log("renderProps:",renderProps);
-
-      const store = middlewareConfig(about,{});
-      console.log("store1:",store);
+      const store = middlewareConfig(about);
       store.subscribe(function(){
-        console.log("我执行了");
         const state = store.getState();
         const __html__ = renderToString(
           <Provider store={store}>
@@ -39,7 +35,6 @@ export default (req,res,next)=>{
 
         res.status(200).end(page.main(__html__,state));
       });
-      console.log("store2:",store);
 
       const action = pageRouter(renderProps);
       console.log("action:",action);

@@ -10,7 +10,7 @@ export default (renderProps)=>{
       return  actionType.resetState();
     case '/web/backend':
       return  asyncAction.getDetail(Utils.time.day);
-    case '/web/list':
+    case '/web/':
       return  asyncAction.getList();
     case '/web/detail/:date':
       let date = location.query.date

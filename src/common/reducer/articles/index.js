@@ -2,7 +2,7 @@ import { REQUEST_POSTS ,RECEIVE_POSTS } from '../../actions/network';
 import { requestFn } from '../common/request';
 import { getDataDataHanlder } from '../common/common';
 
-export function articles(state={},action){
+export default function articles(state={},action){
   if(action.key!="articles"){
     return state;
   }
