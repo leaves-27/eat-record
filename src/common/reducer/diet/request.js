@@ -4,7 +4,7 @@ export function request(state,action){
   };
 
   if(action.method == "POST"){ //提交数据成功
-    if(action.data.code==0) {
+    if(action.data && action.data.code==0) {
       diet = Object.assign({},diet,{
         status : 1
       });
@@ -13,7 +13,7 @@ export function request(state,action){
     return Object.assign({},state,diet);
   }else{
     let data;
-    if(action.data.code == 0 && !action.data.data){
+    if(action.data && action.data.code == 0 && !action.data.data){
       const initState = {
         fieldsets:[{
           name:'标题1',

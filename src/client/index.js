@@ -2,11 +2,11 @@ import React from 'react';
 import { render } from "react-dom";
 import { Provider } from 'react-redux';
 import { match,browserHistory} from 'react-router';
-import { createBrowserHistory } from 'history'
+import { syncHistoryWithStore } from 'react-router-redux';
 
-import { about } from '../common/reducer/index';
+import about from '../common/reducer/index';
 import middlewareConfig from '../common/middleware-config';
-import routes from '../common/router';
+import createRoutes from '../common/router';
 
 import css from '../../bower_components/bootstrap/dist/css/bootstrap.min.css'
 import stylus from './index.styl';
@@ -14,11 +14,11 @@ import stylus from './index.styl';
 import $ from 'jquery'
 import 'bootstrap';
 
-const initialState = window.__INITIAL_STATE__;
-const store = middlewareConfig(about,initialState);
+const store = middlewareConfig(about,window.__INITIAL_STATE__);
+const history = syncHistoryWithStore(browserHistory,store);
 
 match({
-  history: browserHistory,
+  history: createRoutes(history),
   routes:routes(store.getState())
 }, (error, redirectLocation, renderProps) => {
   render(

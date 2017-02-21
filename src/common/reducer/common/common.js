@@ -4,7 +4,7 @@ import { requestFn } from './request';
 /*
 ** 初始化fieldsets数据
 **/
-const initFieldsets = ()=>{
+export const initFieldsets = ()=>{
   const fieldsets =[{
     name:'标题1',
     groups:[]
@@ -28,7 +28,7 @@ const initFieldsets = ()=>{
 ** 2.查询数据过程没有出错，但没查到需要的数据，返回null。
 ** 3.查到数据过程没有出错，查到需要的数据，返回需要的正确数据；
 **/
-const getDataDataHanlder = (state={},action,callBack)=>{
+export  const getDataDataHanlder = (state={},action,callBack)=>{
   if(action.data && action.data.code==0){
     return Object.assign({},state,{
       data : action.data.data
@@ -52,12 +52,15 @@ const getDataDataHanlder = (state={},action,callBack)=>{
 /*
 * 公用的status业务逻辑处理
 **/
-const statusHanlder = (state,action)=>{
+const postHanlder = (state,action)=>{
   let status = 0;
+  console.log("action.data.code10:",action);
 
-  if(action.data.code==0){
+  if(action.data && action.data.code && action.data.code==0){
     status = 1;
   }
+
+  console.log("action.data.code11:",action);
 
   return Object.assign({},state,{
     status : status

@@ -10,8 +10,7 @@ import Detail from './containers/detail/index';
 import Backend from './containers/backend/index';
 import Login from './containers/login/index';
 
-
-const routes = (history) => {
+export default (history) => {
   return (
     <Router history={history}>
       <Route path="web" component={App}>
@@ -23,5 +22,3 @@ const routes = (history) => {
     </Router>
   )
 };
-
-export default routes;

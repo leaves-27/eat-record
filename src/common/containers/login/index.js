@@ -11,9 +11,6 @@ import Message from '../../components/message/index';
 // import * as Validation from "../../reducer/validation";
 
 class Login extends Component{
-  constructor(props, context) {
-    super(props, context);
-  }
   getLoginBox(actions){
     return (
       <div className="dialog">
@@ -50,7 +47,7 @@ class Login extends Component{
     const { actions,login } = this.props;
     let result;
 
-    if (login && login.request && login.request.status==1) {
+    if (login && login.status==1){
       result = (
         <div className="text-center login-success">
           登录成功，去<Link to="/web/backend">创建文章</Link>

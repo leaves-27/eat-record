@@ -1,20 +1,19 @@
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { match , RouterContext } from 'react-router';
-import { createHistory } from 'history';
+import { createLocation,createMemoryHistory } from 'history';
 import { Provider } from 'react-redux';
 import { combineReducers } from 'redux';
 
 import middlewareConfig from '../common/middleware-config';
 import createRoutes from '../common/router';
-import { pageRouter } from './page-router';
+import pageRouter from './page-router';
 import * as page  from './page';
-import { about } from '../common/reducer/index';
+import about from '../common/reducer/index';
 
-export const web=(req,res,next)=>{
-  const history = createHistory();
-  const routes = createRoutes(history);
-  const location = history.createLocation(req.url);
+export default (req,res,next)=>{
+  const routes = createRoutes(createMemoryHistory());
+  const location = createLocation(req.url);
   
   match({
     routes: routes,
@@ -25,8 +24,12 @@ export const web=(req,res,next)=>{
     }else if(redirectLocation){
       res.redirect(redirectLocation.pathname + redirectLocation.search);
     }else if(renderProps){
-      const store = middlewareConfig(about);
+      console.log("renderProps:",renderProps);
+
+      const store = middlewareConfig(about,{});
+      console.log("store1:",store);
       store.subscribe(function(){
+        console.log("我执行了");
         const state = store.getState();
         const __html__ = renderToString(
           <Provider store={store}>
@@ -36,7 +39,11 @@ export const web=(req,res,next)=>{
 
         res.status(200).end(page.main(__html__,state));
       });
-      store.dispatch(pageRouter(renderProps));
+      console.log("store2:",store);
+
+      const action = pageRouter(renderProps);
+      console.log("action:",action);
+      store.dispatch(action);
       
     }else{
       res.status(404).end('Not found');
