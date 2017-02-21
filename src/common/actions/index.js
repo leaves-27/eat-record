@@ -40,6 +40,7 @@ export function inputGroup(pIndex,cIndex,_this){
 
 
 export function changeUser(_this){
+  console.log("_this",_this);
   return {
     type:actionTypesApp.CHANGE_USER,
     target:_this.target
