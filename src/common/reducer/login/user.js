@@ -2,6 +2,13 @@ import { actionTypesApp } from '../../actions/index';
 
 export function user(state = {} ,action){
   switch (action.type){
+    
+    case actionTypesApp.RESET_STATE:
+      return Object.assign({},state,{
+        name:"",
+        password:""
+      });
+
     case actionTypesApp.CHANGE_USER:
       let result = {};
       let user;

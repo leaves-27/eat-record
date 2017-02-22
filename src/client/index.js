@@ -17,14 +17,9 @@ import 'bootstrap';
 const store = middlewareConfig(about,window.__INITIAL_STATE__);
 const history = syncHistoryWithStore(browserHistory,store);
 
-match({
-  history: createRoutes(history),
-  routes:routes(store.getState())
-}, (error, redirectLocation, renderProps) => {
-  render(
-    <Provider store={store}>
-      <RouterContext {...renderProps} />
-    </Provider>,
-    document.getElementById('root')
-  )
-});
+render(
+  <Provider store={store}>
+    {createRoutes(history)}
+  </Provider>,
+  document.getElementById('root')
+)

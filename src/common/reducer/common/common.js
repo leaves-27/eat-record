@@ -1,3 +1,4 @@
+import * as actionTypesApp from '../../actions/index';
 import { REQUEST_POSTS ,RECEIVE_POSTS } from '../../actions/network';
 import { requestFn } from './request';
 
@@ -68,9 +69,12 @@ const postHanlder = (state,action)=>{
 }
 
 export const status = (state = {} ,action)=>{
-  if(action.type == RECEIVE_POSTS){
-    return requestFn(state,action,postHanlder);
-  }
-
-  return requestFn(state,action);
+  return requestFn(state,action,postHanlder,[{
+    action:actionTypesApp.RESET_STATE,
+    hanlder:function(state,action){
+      return Object.assign({},state,{
+        status : 0
+      });
+    }
+  }]);
 }
