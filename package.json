@@ -1,13 +1,14 @@
 {
   "name": "eat-record",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "111",
   "author": "leaves-27",
   "license": "ISC",
   "scripts": {
     "mongodb": "mongod --dbpath '/Users/kk/tests/data'",
-    "start": "node ./build/eat-record/server.js",
-    "build": "webpack --config webpack.server.babel.js && webpack --config webpack.client.babel.js"
+    "start": "webpack --watch & node ./server.js",
+    "build": "webpack --config webpack.client.babel.js && webpack --config webpack.server.babel.js",
+    "prod": "webpack --config webpack.client.babel.js && webpack --config webpack.prod.babel.js"
   },
   "dependencies": {
     "body-parser": "~1.13.2",
@@ -47,6 +48,7 @@
     "babel-preset-es2015": "^6.14.0",
     "babel-preset-react": "^6.11.1",
     "babel-preset-stage-0": "^6.16.0",
+    "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.25.0",
     "exports-loader": "^0.6.3",
     "expose-loader": "^0.7.1",
@@ -61,6 +63,7 @@
     "stylus": "^0.54.5",
     "stylus-loader": "^2.3.1",
     "url-loader": "^0.5.7",
-    "webpack": "^1.13.2"
+    "webpack": "^1.13.2",
+    "zip-webpack-plugin": "^0.3.0"
   }
 }

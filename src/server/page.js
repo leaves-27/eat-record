@@ -11,7 +11,7 @@ export const error = (message, error = {
   <meta name="renderer" content="webkit" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>test</title>
+  <title>秀的饮食记录本</title>
   <link rel="stylesheet" href="/static/bundle.css" />
 </head>
 <body>
@@ -34,7 +34,7 @@ export const main = (__html__,state) =>{
     <meta name="renderer" content="webkit" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>test</title>
+    <title>秀的饮食记录本</title>
     <link rel="stylesheet" href="/static/bundle.css" />
   </head>
   <body>

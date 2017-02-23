@@ -3,6 +3,8 @@ var webpack = require('webpack');
 var path = require('path');
 var fs = require('fs');
 var jsonObj = JSON.parse(fs.readFileSync('./package.json'));
+var CopyWebpackPlugin = require("copy-webpack-plugin");
+var ZipPlugin = require('zip-webpack-plugin')
 
 function _externals() {
   var manifest = require('./package.json');
@@ -15,6 +17,8 @@ function _externals() {
   return externals;
 }
 
+var outDir = __dirname+"/build/eat-record";
+
 module.exports = {
   entry:{
     server:'./src/server/index.js'
@@ -25,7 +29,6 @@ module.exports = {
     __dirname:true
   },
   target:'node',
-  devtool: 'cheap-source-map',
   module:{
     loaders: [{
       test: /\.js?$/,
@@ -38,9 +41,30 @@ module.exports = {
       ]
     }]
   },
+  plugins: [
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false
+      }
+    }),
+    new CopyWebpackPlugin([{
+      from: __dirname + '/server.js',
+      to:outDir,
+      force:true
+    },{
+      from: __dirname + '/dist/**/*',
+      to:outDir,
+      force:true
+    }])
+  ],
   externals: _externals(),
   output: {
-    path: path.resolve(__dirname,""),
+    path: path.resolve(__dirname,''),
     filename: 'server.js'
   }
 };
+
+// new ZipPlugin({
+//       path:path.join(__dirname,'/build'),
+//       filename: 'dist.zip'
+//     })

@@ -12,16 +12,16 @@ import { addGroup , deleteGroup, inputGroup } from './group';
 const initState = {
   step:1,
   fieldsets:[{
-    name:'标题1',
+    name:'早餐',
     groups:[]
   },{
-    name:'标题2',
+    name:'中餐',
     groups:[]
   },{
-    name:'标题3',
+    name:'晚餐',
     groups:[]
   },{
-    name:'标题4',
+    name:'其他',
     groups:[]
   }]
 };

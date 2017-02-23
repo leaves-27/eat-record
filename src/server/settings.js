@@ -1,3 +1,3 @@
 module.exports = {
-  "settings":"/Users/kk/node/settings.json"
+  "settings":"/data/nodejs/settings.json"
 }

@@ -57,7 +57,7 @@ module.exports = {
     new ExtractTextPlugin("bundle.css")
   ],
   output: {
-    path: `${__dirname}/build/${jsonObj.name}/static`,
+    path: `${__dirname}/dist`,
     filename: 'bundle.js',
     publicPath:"static"
   }

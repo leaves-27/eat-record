@@ -33,8 +33,8 @@ export default (req,res,next)=>{
           if(location.pathname=="/web/login"){
             //登录成功后，跳转到创建文章页面或跳转到相应页面
             let redirectUrl = "/web/backend";
-
-            if(location.query.redirectUrl){
+            console.log("location:",location);
+            if(location.query && location.query.redirectUrl){
               redirectUrl = location.query.redirectUrl;
             }
 
@@ -42,8 +42,9 @@ export default (req,res,next)=>{
           }
         }else{
           if(location.pathname!="/web/login"){
-            res.redirect(location.pathname+"?redirectUrl="+location.query.redirectUrl);
+            res.redirect("/web/login");
           }
+          // res.redirect(location.pathname+"?redirectUrl="+location.query.redirectUrl);
         }
 
         const __html__ = renderToString(

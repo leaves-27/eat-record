@@ -9,7 +9,7 @@ import { fetchData } from './network';
 **/
 
 //域名
-export const prefixUrl = "http://localhost:3000/"
+export const prefixUrl = "//funnyxiu.com/"
 
 export function postLogin(){
   let key = "login";
