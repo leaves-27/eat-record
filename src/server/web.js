@@ -10,6 +10,7 @@ import createRoutes from '../common/router';
 import pageRouter from './page-router';
 import * as page  from './page';
 import about from '../common/reducer/index';
+import * as actionType from '../common/actions/index';
 
 export default (req,res,next)=>{
   const routes = createRoutes(createMemoryHistory());
@@ -27,6 +28,24 @@ export default (req,res,next)=>{
       const store = middlewareConfig(about);
       store.subscribe(function(){
         const state = store.getState();
+
+        if(state.login.status==1) {
+          if(location.pathname=="/web/login"){
+            //登录成功后，跳转到创建文章页面或跳转到相应页面
+            let redirectUrl = "/web/backend";
+
+            if(location.query.redirectUrl){
+              redirectUrl = location.query.redirectUrl;
+            }
+
+            res.redirect(redirectUrl);
+          }
+        }else{
+          if(location.pathname!="/web/login"){
+            res.redirect(location.pathname+"?redirectUrl="+location.query.redirectUrl);
+          }
+        }
+
         const __html__ = renderToString(
           <Provider store={store}>
             <RouterContext {...renderProps} />
@@ -36,8 +55,14 @@ export default (req,res,next)=>{
         res.status(200).end(page.main(__html__,state));
       });
 
-      const action = pageRouter(renderProps);
-      console.log("action:",action);
+      const action = pageRouter(res,store,renderProps);
+
+      let status = 0;
+      if(req.session.user){
+        status = 1;
+      };
+      
+      store.dispatch(actionType.setLoginStatus(status));
       store.dispatch(action);
       
     }else{

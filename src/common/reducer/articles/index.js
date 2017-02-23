@@ -1,17 +1,13 @@
 import { REQUEST_POSTS ,RECEIVE_POSTS } from '../../actions/network';
-import { requestFn } from '../common/request';
-import { getDataDataHanlder } from '../common/common';
+import { createReducer } from 'redux-convenient-utils';
 
-export default function articles(state={},action){
-  if(action.key!="articles"){
-    return state;
+const initState = [];
+export default createReducer(initState,{
+  [RECEIVE_POSTS ](state, action) {
+    if(action.data.code == 0) {
+      return Object.assign([],[...state],action.data.data);
+    }else{
+      return initState;
+    }
   }
-
-  if(action.type == REQUEST_POSTS){
-    return Object.assign({},state,requestFn(state,action));
-  }else if(action.type == RECEIVE_POSTS){
-    return Object.assign({},state,requestFn(state,action,getDataDataHanlder(state,action,function(){
-      return [];
-    })));
-  }
-}
+});

@@ -37,6 +37,7 @@ export function postLogin(){
   }
 }
 
+
 export function getList(){//key为获取的json节点数据的节点名。
   let key = "articles"
   return (dispatch, getState) => {
@@ -73,7 +74,7 @@ export function postArticle(key){
         'Content-Type': 'application/json;charset=utf-8'
       },
       body: JSON.stringify({
-        data:state.diet.data.fieldsets
+        data:state.diet.fieldsets
       })
     };
 
@@ -82,5 +83,27 @@ export function postArticle(key){
       key:key,
       options:options
     }));
+  }
+}
+
+export function loginout(){
+  let key = "loginout";
+
+  return (dispatch, getState) => {
+    const url = prefixUrl+"api/loginout";
+
+    let state = getState();
+    let options = {
+      headers:{
+        'Accept': 'application/json',
+        'Content-Type': 'application/json;charset=utf-8', 
+      }
+    };
+
+    return dispatch(fetchData({
+      url:url,
+      key:key,
+      options:options
+    }))
   }
 }

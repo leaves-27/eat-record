@@ -23,8 +23,6 @@ export const error = (message, error = {
 `;
 
 export const main = (__html__,state) =>{
-  console.log("main:",state);
-  
   return  `
   <!DOCTYPE html>
   <html lang="en">

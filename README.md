@@ -129,5 +129,13 @@ backend:
   status:0
 
 
+  login:
+    status:1。
+    跳转到backend.
+  loginout:
+    status:0，
+    跳转到login.
+
+
 
 

@@ -12,15 +12,25 @@ export const actionTypesApp = createConstants(
   'NEXT',
   'DELETE_DIET',
   'CHANGE_USER',
-  'RESET_STATE'
+  'RESET_STATE',
+  'SET_LOGIN_STATUS'
 );
 
 //action创建函数
-export function resetState(index){
+export function resetState(){
   return {
     type:actionTypesApp.RESET_STATE
   }
 }
+
+//action创建函数
+export function setLoginStatus(value){
+  return {
+    type:actionTypesApp.SET_LOGIN_STATUS,
+    value:value
+  }
+}
+
 
 export function addGroup(index){
   return {
@@ -39,7 +49,6 @@ export function inputGroup(pIndex,cIndex,_this){
 }
 
 export function changeUser(_this){
-  console.log("_this",_this);
   return {
     type:actionTypesApp.CHANGE_USER,
     target:_this.target

@@ -13,7 +13,6 @@ import Message from '../../components/message/index';
 class Login extends Component{
   componentDidMount(){
     const { actions } = this.props;
-    
     actions.resetState();
   }
   getLoginBox(login,actions){
@@ -28,7 +27,7 @@ class Login extends Component{
               <div className="form-group">
                 <label htmlFor="inputEmail3" className="col-sm-2 control-label">用户名</label>
                 <div className="col-sm-10">
-                  <input type="text" className="form-control" name="name" id="name" value={login.user.name} onChange={ actions.changeUser.bind(this) } placeholder="用户名" />
+                  <input type="text" className="form-control" name="name" id="name" onChange={ actions.changeUser.bind(this) } placeholder="用户名" />
                 </div>
               </div>
               <div className="form-group">
@@ -52,19 +51,20 @@ class Login extends Component{
     const { actions,login } = this.props;
     let result;
 
-    if (login && login.status==1){
+    if(login.code && login.code!=0){
       result = (
-        <div className="text-center login-success">
-          登录成功，去<Link to="/web/backend">创建文章</Link>
+        <div>
+          <Message msg={ login.msg } />
+          { this.getLoginBox(login,actions) }
         </div>
-      );
+      )
     }else{
-      result = this.getLoginBox(login,actions)
+      result = this.getLoginBox(login,actions);
     }
 
     return (
       <div className>
-        <Header login={ login } />
+        <Header login={ login } loginout={ actions.loginout } />
         { result }
       </div>
       
@@ -83,7 +83,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     actions: bindActionCreators({
       postLogin:asyncAction.postLogin,
       changeUser:actionType.changeUser,
-      resetState:actionType.resetState
+      resetState:actionType.resetState,
+      loginout:asyncAction.loginout
     },dispatch)
   };
 };

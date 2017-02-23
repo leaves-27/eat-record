@@ -6,7 +6,7 @@ import { Link } from 'react-router';
 import Header from '../../components/header/index';
 import Group from '../../components/group/index';
 import Message from '../../components/message/index';
-import Utils from '../../utils';
+import Utils from '../../../server/utils';
 
 import Modal from '../../components/modal/index';
 
@@ -14,13 +14,10 @@ import * as actionType from '../../actions/index';
 import * as asyncAction from '../../actions/async';
 
 class Backend extends Component{
-  constructor (props) {
-    super(props);
-  }
   
   componentDidMount(){
     const { actions } = this.props;
-    actions.getDetail("diet",Utils.time.day);
+    actions.getDetail("diet_get",Utils.time.day);
   }
 
   getFieldset(temp){
@@ -48,7 +45,7 @@ class Backend extends Component{
     let $modal = $('#myModal');
     $(".modal-body p",$modal).text("你确定你要提交吗？");
     $modal.on("hidden.bs.modal",function(e){
-      actions.postArticle("diet");
+      actions.postArticle("diet_post");
     });
     $modal.modal({
       show:true
@@ -121,27 +118,25 @@ class Backend extends Component{
     let _self = this;
     let result;
 
-    console.log("yy");
-
-    if (!diet || !diet.request || !diet.request.data || diet.request.data.code!=0) {
+    if (diet.code && diet.code!=0) {
       let msg = "数据获取失败，请稍后刷新页面重新获取数据";
 
-      if(diet && diet.data) {
-        msg = diet.data.msg; 
+      if(diet.msg){
+        msg = diet.msg;
       }
 
       result = (
         <Message msg={ msg } />
       )
-    }else if(diet.request.status && diet.request.status ==1){
+    }else if(diet.step == 2){
       result = this.getStep2();
     }else{
-      result = this.getStep1(login,diet.request.data.data.fieldsets,actions);
+      result = this.getStep1(login,diet.fieldsets,actions);
     }
 
     return (
       <div className="backend">
-        <Header login={ login } />
+        <Header login={ login } loginout={ actions.loginout } />
         { result }
       </div>
     );
@@ -162,8 +157,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
       addGroup : actionType.addGroup,
       deleteGroup : actionType.deleteGroup,
       inputGroup : actionType.inputGroup,
-      getDayDiet : asyncAction.getDayDiet,
-      postArticle : asyncAction.postArticle
+      getDetail : asyncAction.getDetail,
+      postArticle : asyncAction.postArticle,
+      loginout : asyncAction.loginout
     },dispatch)
   };
 };

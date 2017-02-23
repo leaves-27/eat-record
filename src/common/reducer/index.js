@@ -13,14 +13,5 @@ export default combineReducers({
   routing
 });
 
-// export default function(state = {} , action){
-//   return {
-//     login : login(state.login,action),
-//     diet : diet(state.diet,action),
-//     detail : detail(state.detail,action),
-//     articles : articles(state.articles,action)
-//   };
-// }
-
 
 

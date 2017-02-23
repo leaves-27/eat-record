@@ -43,40 +43,8 @@ export function fetchData(params) {
 
     return fetch(url,newOptions)
       .then(res => {
-        /*
-        ** 请求成功后发生跳转的情况一般为：
-        ** 1.登录成功后；
-        ** 2.接口请求数据时返回当前未登录。
-        **
-        ** 登录成功后跳转的情况，一般有两种：
-        ** 1.url没有任何需要跳转到的地址。
-        ** 2.url中含有redirectUrl的情况。
-        **
-        ** 接口请求数据时返回当前未登录：
-        ** 未登录的情况下，返回值code为4。
-        **/
-
-        console.log("res11:",res);
-        // let result = res.json();
-        // let currentPageUrl = result.referer;
-
-        // if(key=="login"){
-        //   if(result.code==0) {
-        //     let redirectUrl = "/web/backend";
-        //     if(currentPageUrl.indexOf("redirectUrl")>0) {
-        //       redirectUrl = currentPageUrl.getParam("redirectUrl");
-        //     }
-
-        //     res.redirect(redirectUrl);
-        //   }else{
-        //     return result;
-        //   }
-        // }else{
-        //   if(result.code==4){
-        //     res.redirect("/web/login?redirectUrl=" + currentPageUrl);
-        //   }
-        //   return result;
-        // }
+        let result = res.json();
+        return result;
       })
       .then(json => dispatch(receiveData(key,json,newOptions)))
   }

@@ -3,7 +3,6 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import Header from '../../components/header/index';
-import Group from '../../components/group/index';
 import Message from '../../components/message/index';
 
 import * as actionType from '../../actions/index';
@@ -12,7 +11,7 @@ import * as asyncAction from '../../actions/async';
 class Detail extends Component{
   componentDidMount(){
     const { actions } = this.props;
-    actions.getList("articles");
+    actions.getDetail("detail",this.props.params.date);
   }
   getNewFieldset(fieldsets){
     let _self = this;
@@ -41,8 +40,8 @@ class Detail extends Component{
     });
     return newGroups;
   }
-  getStep2(articles,index){
-    let fieldsets = this.getNewFieldset(articles.data.data[index].fieldsets);
+  getStep2(detail,date){
+    let fieldsets = this.getNewFieldset(detail.fieldsets);
 
     return ( 
       <div className="form-horizontal">
@@ -54,21 +53,20 @@ class Detail extends Component{
   }
   render(){
     let _self = this;
+
+    const { detail,login,actions  } = this.props;
     let result;
-
-    const { articles,login } = this.props;
-
-    if(!articles || !articles.data || articles.data.code!=0){
-      result = (
-        <Message msg="数据获取失败，请稍后刷新页面重新获取数据" />
-      )
+    if(detail.date) {
+      result = this.getStep2(detail,this.props.params.date)  
     }else{
-      result = this.getStep2(articles,this.props.params.id);
+      result = (
+        <Message msg="正在加载中，请稍等..." />
+      )
     }
 
     return (
       <div className="detail">
-        <Header login={ login } />
+        <Header login={ login } loginout={ actions.loginout } />
         { result }
       </div>
     );  
@@ -77,7 +75,7 @@ class Detail extends Component{
 
 const mapStateToProps = (state,ownProps) => { //将store中特定的值绑定到子组件上
   return {
-    articles:state.articles,
+    detail:state.detail,
     login : state.login
   };
 };
@@ -85,7 +83,8 @@ const mapStateToProps = (state,ownProps) => { //将store中特定的值绑定到
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     actions: bindActionCreators({
-      getList:asyncAction.getList
+      getDetail:asyncAction.getDetail,
+      loginout : asyncAction.loginout
     },dispatch)
   };
 };

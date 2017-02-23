@@ -16,48 +16,28 @@ class List extends Component{
   }
 
   getList(articles){
-    let list;
+    let list = articles.map(function(item,index){
+      let link = "/web/detail/" +item.date;
 
-    if (articles.data.data.length > 0) {
-      list = articles.data.data.map(function(item,index){
-        let link = "/web/detail/" +index;
-
-        return (
-          <li key={index} className="list-group-item">
-            <Link to={link}>{item.date}</Link>
-          </li>
-        );
-      });
-    }else{
-      list = (
-        <li>
-          <Message msg="没有列表信息。" />
+      return (
+        <li key={index} className="list-group-item">
+          <Link to={link}>{item.date}</Link>
         </li>
       );
-    }
+    });
+
     return list;
   }
   render(){
-    let result;
-    const { articles,login } = this.props;
-
-    if(!articles || !articles.data || articles.data.code!=0){
-      result =  (
-        <Message msg="数据获取失败，请稍后刷新页面重新获取数据" />
-      ) 
-    }else{
-      result = (
+    const { articles,login,actions } = this.props;
+    
+    return (
+      <div className="list">
+        <Header login={ login } loginout={ actions.loginout } />
         <div className="">
           <h2>标题：</h2>
           <ul className="list-group">{ this.getList(articles) }</ul>
         </div>
-      );
-    };
-    
-    return (
-      <div className="list">
-        <Header login={ login } />
-        {result}
       </div>
     );
   }
@@ -73,7 +53,8 @@ const mapStateToProps = (state,ownProps) => { //将store中特定的值绑定到
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     actions: bindActionCreators({
-      getList:asyncAction.getList
+      getList:asyncAction.getList,
+      loginout : asyncAction.loginout
     },dispatch)
   };
 };

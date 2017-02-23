@@ -5,13 +5,28 @@ export default class Header extends Component{
     super(props);
   }
   render(){
-    let { login } = this.props;
-    let li;
+    let { login,loginout } = this.props;
+    let result;
 
-    if (login && login.status==0){
-      li = (<li><a href="/web/loginout">退出</a></li>)
+    if(login.status==1){
+      result = (
+        <div className="navbar-collapse collapse" role="navigation">
+          <ul className="nav navbar-nav hidden-sm">
+            <li><a href="/web/backend">创建文章</a></li>
+          </ul>
+          <ul className="nav navbar-nav navbar-right hidden-sm">
+            <li><a onClick={ loginout } href="javascript:void(0)">退出</a></li>
+          </ul>
+        </div>
+      )
     }else{
-      li = (<li><a href="/web/login">登陆</a></li>)
+      result = (
+        <div className="navbar-collapse collapse" role="navigation">
+          <ul className="nav navbar-nav navbar-right hidden-sm">
+            <li><a href="/web/login">登陆</a></li>
+          </ul>
+        </div>
+      )
     };
 
     return (
@@ -26,11 +41,7 @@ export default class Header extends Component{
             </button>
             <a className="navbar-brand hidden-sm" href="/web/">首页</a>
           </div>
-          <div className="navbar-collapse collapse" role="navigation">
-            <ul className="nav navbar-nav navbar-right hidden-sm">
-              { li }
-            </ul>
-          </div>
+          { result }
         </div>
       </div>
     )

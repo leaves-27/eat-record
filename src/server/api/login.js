@@ -8,6 +8,7 @@ Login.prototype.post = function(req, res, next) {
       password = md5.update(req.body.data.password).digest('hex');
 
   User.get(req.body.data.name,function(err,user){
+    
     if (!user){
       return res.json({
         code:1,

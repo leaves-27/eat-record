@@ -22,23 +22,18 @@ Article.prototype.getAll = function(req, res, next){
 };
 
 Article.prototype.getOne = function(req, res, next){
-  Articles.getOne(req.date,function(err,data){
+  Articles.getOne(req.query.date,function(err,data){
     if(err){
       res.json({
-        detail:{
-          code : 1,
-          msg : err
-        }
+        code : 1,
+        msg : err
       })
     };
 
     res.json({
-      detail:{
-        code:0,
-        data:data
-      }
+      code:0,
+      data:data
     });
-    
   });
 };
 
