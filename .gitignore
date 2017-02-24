@@ -1,4 +1,8 @@
 /bower_components/
 /node_modules/
 /build/
+/dist/
+./access.log
+./error.log
+./server.js
 .DS_Store

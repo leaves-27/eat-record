@@ -42,6 +42,11 @@ module.exports = {
     }]
   },
   plugins: [
+    new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': '"production"'
+      }
+    }),
     new webpack.optimize.UglifyJsPlugin({
       compress: {
         warnings: false
@@ -49,6 +54,14 @@ module.exports = {
     }),
     new CopyWebpackPlugin([{
       from: __dirname + '/server.js',
+      to:outDir,
+      force:true
+    },{
+      from: __dirname + '/1.server.js',
+      to:outDir,
+      force:true
+    },{
+      from: __dirname + '/2.server.js',
       to:outDir,
       force:true
     },{

@@ -8,7 +8,7 @@
     "mongodb": "mongod --dbpath '/Users/kk/tests/data'",
     "start": "webpack --watch & node ./server.js",
     "build": "webpack --config webpack.client.babel.js && webpack --config webpack.server.babel.js",
-    "prod": "webpack --config webpack.client.babel.js && webpack --config webpack.prod.babel.js"
+    "prod": "set NODE_ENV=production && webpack --config webpack.prod_client.babel.js -p && webpack --config webpack.prod_server.babel.js"
   },
   "dependencies": {
     "body-parser": "~1.13.2",

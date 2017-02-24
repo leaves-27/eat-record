@@ -46,7 +46,8 @@ export const main = (__html__,state) =>{
   <script>
     window.__INITIAL_STATE__ = ${JSON.stringify(state)};;
   </script>
-  <script type="text/javascript" src="/static/bundle.js"></script>
+  <script type="text/javascript" src="/static/vendor.js"></script>
+  <script type="text/javascript" src="/static/app.js"></script>
   </body>
   </html>
   `;

@@ -6,7 +6,6 @@ var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var fs = require("fs");
 var jsonObj = JSON.parse(fs.readFileSync('./package.json'));
 
-
 var vendor = {
   jquery:path.join(__dirname,"bower_components/jquery/dist/jquery.min.js"),
   bootstrap:path.join(__dirname,"bower_components/bootstrap/dist/js/bootstrap.min.js")
@@ -14,7 +13,8 @@ var vendor = {
 
 module.exports = {
   entry:{
-    app:['./src/client/index']
+    app:['./src/client/index'],
+    vendor:["jquery","bootstrap",'react','react-dom','react-redux',"react-router","react-router-redux"] 
   },
   resolve:{
     alias: {
@@ -22,7 +22,6 @@ module.exports = {
       bootstrap:vendor.bootstrap
     }
   },
-  devtool:'cheap-source-map',
   module:{
     loaders: [
     {
