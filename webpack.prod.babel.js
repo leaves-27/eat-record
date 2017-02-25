@@ -5,7 +5,8 @@ var path = require('path');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var fs = require("fs");
 var CopyWebpackPlugin = require("copy-webpack-plugin");
-var ZipPlugin = require('zip-webpack-plugin')
+var ZipPlugin = require('zip-webpack-plugin');
+var argv = require('yargs').argv;
 
 var jsonObj = JSON.parse(fs.readFileSync('./package.json'));
 var vendor = {
@@ -122,5 +123,19 @@ var serverConfig = {
   }
 };
 
-module.exports = clientConfig;
-// module.exports = serverConfig;
+var config;
+/*
+** 自定义webpack参数：
+** 为webpack自定义了一个compile命令，用来表明是编译客户端代码还是编译服务器端,其有两个值：server和client。
+** 调用方式如下：
+**    webpack --compile server
+** 
+**/
+
+if(argv.compile == "server") {
+  config = serverConfig;
+}else{
+  config = clientConfig;
+}
+
+module.exports = config;
