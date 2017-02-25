@@ -6,8 +6,8 @@
   "license": "ISC",
   "scripts": {
     "mongodb": "mongod --dbpath '/Users/kk/tests/data'",
-    "dev": "cross-env NODE_ENV=development && webpack --config webpack.dev.babel.js",
-    "prod": "cross-env NODE_ENV=production && webpack --config webpack.prod.babel.js -p",
+    "dev": "cross-env NODE_ENV=development && webpack --config webpack.dev.babel.js --compile server && webpack --config webpack.dev.babel.js --compile client",
+    "prod": "cross-env NODE_ENV=production && webpack --config webpack.dev.babel.js --compile server -p && webpack --config webpack.dev.babel.js --compile client -p",
     "start": "node ./build/eat-record/server.js"
   },
   "dependencies": {
