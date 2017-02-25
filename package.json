@@ -5,11 +5,10 @@
   "author": "leaves-27",
   "license": "ISC",
   "scripts": {
-    "dev": "cross-env NODE_ENV=development && webpack --config webpack.dev.babel.js",
     "mongodb": "mongod --dbpath '/Users/kk/tests/data'",
-    "start": "node ./build/eat-record/server.js",
-    "build": "webpack --config webpack.client.babel.js && webpack --config webpack.server.babel.js",
-    "prod": "webpack --config webpack.prod_client.babel.js -p && webpack --config webpack.prod_server.babel.js"
+    "dev": "cross-env NODE_ENV=development && webpack --config webpack.dev.babel.js",
+    "prod": "cross-env NODE_ENV=production && webpack --config webpack.prod.babel.js -p",
+    "start": "node ./build/eat-record/server.js"
   },
   "dependencies": {
     "body-parser": "~1.13.2",

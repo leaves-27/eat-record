@@ -21,6 +21,8 @@ import settingsDev from "./settings_dev";
 
 let settings = "";
 let env = process.env.NODE_ENV;
+console.log("server:",env);
+
 if(env=="production") {
   settings = settingsProd
 }else{

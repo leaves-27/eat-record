@@ -4,14 +4,18 @@ var path = require("path");
 var path = require('path');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var fs = require("fs");
-var jsonObj = JSON.parse(fs.readFileSync('./package.json'));
+var CopyWebpackPlugin = require("copy-webpack-plugin");
+var ZipPlugin = require('zip-webpack-plugin')
 
+var jsonObj = JSON.parse(fs.readFileSync('./package.json'));
 var vendor = {
   jquery:path.join(__dirname,"bower_components/jquery/dist/jquery.min.js"),
   bootstrap:path.join(__dirname,"bower_components/bootstrap/dist/js/bootstrap.min.js")
 };
+var outDir = __dirname+"/build/eat-record";
+var env = process.env.NODE_ENV;
 
-module.exports = {
+var clientConfig = {
   entry:{
     app:['./src/client/index'],
     vendor:["jquery","bootstrap",'react','react-dom','react-redux',"react-router","react-router-redux"] 
@@ -58,14 +62,65 @@ module.exports = {
     }),
     new webpack.DefinePlugin({
       'process.env': {
-        'NODE_ENV': '"production"'
+        'NODE_ENV': "'"+env+"'"
       }
     })
   ],
   output: {
-    path : path.resolve(__dirname,`/build/${jsonObj.name}/dist`),
+    path : path.resolve(__dirname,`build/${jsonObj.name}/dist`),
     filename: '[name].js',
     publicPath:"static",
     chunkFilename: '[name].js'
   }
 };
+
+
+var _externals = function() {
+  var manifest = require('./package.json');
+  var dependencies = manifest.dependencies;
+  var externals = {};
+  for (var p in dependencies) {
+      externals[p] = 'commonjs ' + p;
+  }
+
+  return externals;
+}
+
+var serverConfig = {
+  entry:{
+    server:'./src/server/index.js'
+  },
+  node:{
+    console:true,
+    __filename:true,
+    __dirname:true
+  },
+  target:'node',
+  module:{
+    loaders: [{
+      test: /\.js?$/,
+      loader:'babel',
+      query:{
+        presets:["es2015","stage-0","react"]
+      },
+      exclude: [
+        path.resolve(__dirname, "node_modules"),
+      ]
+    }]
+  },
+  plugins: [
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false
+      }
+    })
+  ],
+  externals: _externals(),
+  output: {
+    path: path.resolve(__dirname,`build/${jsonObj.name}`),
+    filename: 'server.js'
+  }
+};
+
+module.exports = clientConfig;
+// module.exports = serverConfig;

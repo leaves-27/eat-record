@@ -11,13 +11,12 @@ import { fetchData } from './network';
 //域名
 
 export let prefixUrl;
-let env = process.env.NODE_ENV=="production";
-console.log("process.env.NODE_ENV:",typeof process.env.NODE_ENV);
-env = "production";
+let env = process.env.NODE_ENV;
+console.log("clinet:",env);
 if(env == "production") {
   prefixUrl= "//funnyxiu.com/"
 }else{
-  prefixUrl= "localhost:3000/"
+  prefixUrl= "http://localhost:3000/"
 }
 
 export function postLogin(){

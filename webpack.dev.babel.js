@@ -59,7 +59,7 @@ var clientConfig = {
     }),
     new webpack.DefinePlugin({
       'process.env': {
-        'NODE_ENV': env
+        'NODE_ENV': "'"+env+"'"
       }
     })
   ],
@@ -114,11 +114,5 @@ var serverConfig = {
   }
 };
 
-// console.log("process.env:",process.env);
-// console.log("config:",process.env.NODE_ENV);
-
-// if (=="dev"){
-// }else if(env="prod"){
-// }
-module.exports = clientConfig;
-// module.exports = serverConfig;
+// module.exports = clientConfig;
+module.exports = serverConfig;
