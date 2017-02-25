@@ -5,10 +5,11 @@
   "author": "leaves-27",
   "license": "ISC",
   "scripts": {
+    "dev": "cross-env NODE_ENV=development && webpack --config webpack.dev.babel.js",
     "mongodb": "mongod --dbpath '/Users/kk/tests/data'",
-    "start": "webpack --watch & node ./server.js",
+    "start": "node ./build/eat-record/server.js",
     "build": "webpack --config webpack.client.babel.js && webpack --config webpack.server.babel.js",
-    "prod": "set NODE_ENV=production && webpack --config webpack.prod_client.babel.js -p && webpack --config webpack.prod_server.babel.js"
+    "prod": "webpack --config webpack.prod_client.babel.js -p && webpack --config webpack.prod_server.babel.js"
   },
   "dependencies": {
     "body-parser": "~1.13.2",
@@ -16,6 +17,7 @@
     "connect-flash": "0.1.1",
     "connect-mongo": "^0.4.2",
     "cookie-parser": "~1.3.5",
+    "cross-env": "^3.1.4",
     "debug": "~2.2.0",
     "ejs": "~2.3.3",
     "express": "~4.13.1",

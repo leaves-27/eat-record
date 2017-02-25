@@ -72,7 +72,7 @@ module.exports = {
   ],
   externals: _externals(),
   output: {
-    path: path.resolve(__dirname,''),
+    path: path.resolve(__dirname,`/build/${jsonObj.name}`),
     filename: 'server.js'
   }
 };

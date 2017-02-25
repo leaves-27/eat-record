@@ -15,10 +15,18 @@ import { Provider } from 'react-redux';
 import { renderToString } from 'react-dom/server';
 
 import router from './router';
-import settingsWrap from './settings';
 import { error } from './page';
+import settingsProd from "./settings_prod";
+import settingsDev from "./settings_dev";
 
-const settings = JSON.parse(fs.readFileSync(settingsWrap.settings));
+let settings = "";
+let env = process.env.NODE_ENV;
+if(env=="production") {
+  settings = settingsProd
+}else{
+  settings = settingsDev
+}
+const config = JSON.parse(fs.readFileSync(settings.config_path));
 
 const accessLog = fs.createWriteStream('access.log',{flags:"a"});
 const errorLog = fs.createWriteStream('error.log',{flags:"a"});
@@ -46,20 +54,20 @@ app.use(cookieParser());
 app.use(sesstion({
   saveUninitialized : false,
   resave : true,
-  secret : settings.cookieSecret,
-  key : settings.db,
+  secret : config.cookieSecret,
+  key : config.db,
   cookie : { 
     maxAge:1000*60*60*24*30
   },
   store : new MongoStore({
-    db:settings.db,
-    host:settings.host,
-    port:settings.port
+    db:config.db,
+    host:config.host,
+    port:config.port
   })
 }));
 
 
-app.use('/static',Express.static(settings.static));
+app.use('/static',Express.static(config.static));
 // app.use(auth);
 app.use('/',router);
 

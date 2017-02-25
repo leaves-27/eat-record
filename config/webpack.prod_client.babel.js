@@ -63,7 +63,7 @@ module.exports = {
     })
   ],
   output: {
-    path: `${__dirname}/dist`,
+    path : path.resolve(__dirname,`/build/${jsonObj.name}/dist`),
     filename: '[name].js',
     publicPath:"static",
     chunkFilename: '[name].js'

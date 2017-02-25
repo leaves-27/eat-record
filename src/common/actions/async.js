@@ -9,7 +9,16 @@ import { fetchData } from './network';
 **/
 
 //域名
-export const prefixUrl = "//funnyxiu.com/"
+
+export let prefixUrl;
+let env = process.env.NODE_ENV=="production";
+console.log("process.env.NODE_ENV:",typeof process.env.NODE_ENV);
+env = "production";
+if(env == "production") {
+  prefixUrl= "//funnyxiu.com/"
+}else{
+  prefixUrl= "localhost:3000/"
+}
 
 export function postLogin(){
   let key = "login";

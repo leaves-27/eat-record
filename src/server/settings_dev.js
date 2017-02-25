@@ -1,3 +1,3 @@
 module.exports = {
-  "settings":"/Users/kk/node/settings.json"
+  "config_path":"/Users/kk/node/settings.json"
 }
