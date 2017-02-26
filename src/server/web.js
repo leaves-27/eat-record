@@ -6,7 +6,7 @@ import { Provider } from 'react-redux';
 import { combineReducers } from 'redux';
 
 import middlewareConfig from '../common/middleware-config';
-import createRoutes from '../common/router';
+import createRoutes from './reate-routes';
 import pageRouter from './page-router';
 import * as page  from './page';
 import about from '../common/reducer/index';

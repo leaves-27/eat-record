@@ -24,12 +24,12 @@ module.exports = {
    */
   deploy : {
     production : {
-      user : "leaves-27",
-      host : "funnyxiu.com",
-      ref  : "origin/0225",
-      repo : "https://github.com/leaves-27/eat-record.git",
-      path : "/data/nodejs/eat-record",
-      "post-deploy" : "npm install && bower install && npm run prod && pm2 restart ./build/eat-record/server.js"
+      "user" : "leaves-27",
+      "host" : "funnyxiu.com",
+      "ref"  : "origin/0225",
+      "repo" : "https://github.com/leaves-27/eat-record.git",
+      "path" : "/data/nodejs/eat-record",
+      "post-deploy" : "npm install && bower install && npm run prod"
     }
   }
 }

@@ -105,7 +105,7 @@ class Backend extends Component{
           </div>
           <div className="control-group">
             <div className="controls">
-              <button type="button" className="btn" onClick={ _self.next.bind(_self) }>提交</button>
+              <button type="button" className="btn btn-default" onClick={ _self.next.bind(_self) }>提交</button>
             </div>
           </div>
         </form>
