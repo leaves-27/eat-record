@@ -12,7 +12,7 @@ import { fetchData } from './network';
 
 export let prefixUrl;
 let env = process.env.NODE_ENV;
-console.log("clinet:",env);
+
 if(env == "production") {
   prefixUrl= "//funnyxiu.com/"
 }else{

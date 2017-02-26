@@ -61,6 +61,13 @@ var clientConfig = {
       names: ['vendor'],
       filename: 'vendor.js'
     }),
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false
+      }
+    }),
+    new webpack.optimize.DedupePlugin(),
+    new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.DefinePlugin({
       'process.env': {
         'NODE_ENV': "'"+env+"'"
@@ -124,6 +131,7 @@ var serverConfig = {
 };
 
 var config;
+
 /*
 ** 自定义webpack参数：
 ** 为webpack自定义了一个compile命令，用来表明是编译客户端代码还是编译服务器端,其有两个值：server和client。
