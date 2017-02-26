@@ -116,13 +116,6 @@ var serverConfig = {
       ]
     }]
   },
-  plugins: [
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false
-      }
-    })
-  ],
   externals: _externals(),
   output: {
     path: path.resolve(__dirname,`build/${jsonObj.name}`),
