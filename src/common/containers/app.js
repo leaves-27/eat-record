@@ -11,7 +11,7 @@ class App extends Component{
     return (
       <div className="app">
         <div className="container-fluid main">
-          {this.props.children || <List login={login} articles={articles} />}
+          {this.props.children }
         </div>
       </div>
     )
