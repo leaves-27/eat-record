@@ -40,19 +40,21 @@ export function postLogin(){
     return dispatch(fetchData({
       url:url,
       key:key,
-      options:options
+      options:options,
+      token : state.login.token
     }))
   }
 }
 
-
-export function getList(){//key为获取的json节点数据的节点名。
-  let key = "articles"
+export function getList(){ //key为获取的json节点数据的节点名。
+  let key = "articles";
   return (dispatch, getState) => {
     const url = prefixUrl+"api/list";
+    
     return dispatch(fetchData({
       url:url,
-      key:key
+      key:key,
+      token : getState().login.token
     }))
   }
 }
@@ -63,9 +65,12 @@ export function getList(){//key为获取的json节点数据的节点名。
 export function getDetail(key,date) {//key为获取的json节点数据的节点名。
   return (dispatch, getState) => {
     const url = prefixUrl+"api/backend?date="+date;
+    let token = getState().login.token;
+    // console.log(token);
     return dispatch(fetchData({
       url:url,
-      key:key
+      key:key,
+      token : token
     }))
   }
 }
@@ -89,7 +94,8 @@ export function postArticle(key){
     return dispatch(fetchData({
       url:url,
       key:key,
-      options:options
+      options:options,
+      token : getState().login.token
     }));
   }
 }
@@ -111,7 +117,8 @@ export function loginout(){
     return dispatch(fetchData({
       url:url,
       key:key,
-      options:options
+      options:options,
+      token : getState().login.token
     }))
   }
 }

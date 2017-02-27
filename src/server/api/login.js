@@ -1,4 +1,7 @@
 var crypto = require('crypto');
+var moment = require("moment");
+var jwt = require('jwt-simple');
+
 var User = require("../models/user");
 
 function Login(){}
@@ -8,7 +11,6 @@ Login.prototype.post = function(req, res, next) {
       password = md5.update(req.body.data.password).digest('hex');
 
   User.get(req.body.data.name,function(err,user){
-    
     if (!user){
       return res.json({
         code:1,
@@ -23,10 +25,19 @@ Login.prototype.post = function(req, res, next) {
       });
     }
 
-    req.session.user = user;
+    let expires = moment().add(7,'days').valueOf();
+    
+    let token = jwt.encode({
+      iss: user._id,
+      exp: expires
+    },req.app.get('jwtTokenSecret'));
+
     res.json({
-      code:0,
-      msg:"登录成功"
+      code : 0,
+      data:{
+        token : token,
+        user: user
+      }
     });
   });
 }

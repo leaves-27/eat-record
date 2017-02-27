@@ -54,7 +54,7 @@ class Detail extends Component{
   render(){
     let _self = this;
 
-    const { detail,login,actions  } = this.props;
+    const { detail,login,actions,location  } = this.props;
     let result;
     if(detail.date) {
       result = this.getStep2(detail,this.props.params.date)  
@@ -66,7 +66,7 @@ class Detail extends Component{
 
     return (
       <div className="detail">
-        <Header login={ login } loginout={ actions.loginout } />
+        <Header login={ login } loginout={ actions.loginout } location={location} />
         { result }
       </div>
     );  

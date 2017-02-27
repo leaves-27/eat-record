@@ -25,13 +25,27 @@ export function fetchData(params) {
   const options = params.options || {};
 
   return dispatch => {
+    let token = params.token || "";
+
     //在请求头中添加credentials:'include'
-    let newOptions = Object.assign({},options,{
-      credentials:'include'
-    });
+    let tempOptions = {
+      credentials : 'include'
+    };
 
+    let tempHeaders;
 
+    if(token){
+      tempHeaders = {
+        'x-access-token': token
+      }
+    }
+    
+    //在请求头中添加token
+    tempOptions.headers = options.headers ? Object.assign({},options.headers,tempHeaders) : tempHeaders;
+    
+    let newOptions = Object.assign({},options,tempOptions);
     let method = 'GET';
+
     if(newOptions.method && newOptions.method.toUpperCase() == "POST") {
       method = newOptions.method;
     };

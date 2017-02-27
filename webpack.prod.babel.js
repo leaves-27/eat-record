@@ -6,10 +6,6 @@ var commonConfig = require("./config");
 
 var plugins = {
   client:[
-    new webpack.optimize.CommonsChunkPlugin({
-      names: ['vendor'],
-      filename: 'vendor.js'
-    }),
     new webpack.optimize.UglifyJsPlugin({
       compress: {
         warnings: false

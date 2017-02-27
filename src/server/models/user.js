@@ -35,6 +35,28 @@ User.prototype.save = function(callback){
 	});
 }
 
+User.findOne = function(params,callback){
+	mongodb.open(function(err,db){
+		if (err) {
+			db.close();
+			return callback(err);
+		};
+		db.collection("users",function(err,collection){
+			if (err) {
+				db.close();
+				return callback(err);
+			};
+			collection.findOne(params,function(err,user){
+				db.close();
+				if (err) {
+					return callback(err);
+				};
+				callback(null,user);
+			});
+		})
+	});
+}
+
 User.get = function(name,callback){
 	mongodb.open(function(err,db){
 		if (err) {

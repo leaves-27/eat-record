@@ -1,6 +1,8 @@
+import { createReducer } from 'redux-convenient-utils';
+
 import { actionTypesApp } from '../../actions/index';
 import { REQUEST_POSTS ,RECEIVE_POSTS } from '../../actions/network';
-import { createReducer } from 'redux-convenient-utils';
+import loginReceiveHanlder from './receive';
 
 const initState = {
   user:{
@@ -10,36 +12,6 @@ const initState = {
   status:0
 };
 
-const loginReceiveHanlder = (state,action)=>{
-  if(action.key=="login"){
-    if(action.data.code == 0) {
-      return Object.assign({},state,{
-        code:0,
-        status:1
-      });
-    }else{
-      return Object.assign({},state,{
-        code:1,
-        msg:action.data.msg
-      });
-    }
-  }else if(action.key=="loginout"){
-    if(action.data.code == 0) {
-      return Object.assign({},state,{
-        code:0,
-        status:0
-      });
-    }else{
-      return Object.assign({},state,{
-        code:1,
-        msg:action.data.msg
-      });
-    }
-  }else{
-    return state;
-  }
-  
-}
 export default createReducer(initState,{
   [ actionTypesApp.RESET_STATE ]( state,action ){
     return initState;

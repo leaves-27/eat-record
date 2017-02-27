@@ -29,11 +29,11 @@ class List extends Component{
     return list;
   }
   render(){
-    const { articles,login,actions } = this.props;
+    const { articles,login,actions,location } = this.props;
     
     return (
       <div className="list">
-        <Header login={ login } loginout={ actions.loginout } />
+        <Header login={ login } loginout={ actions.loginout } location={location} />
         <div className="">
           <h2>标题：</h2>
           <ul className="list-group">{ this.getList(articles) }</ul>

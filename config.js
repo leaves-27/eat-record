@@ -95,6 +95,10 @@ module.exports = {
   },
   plugins:{
     client : [
+      new webpack.optimize.CommonsChunkPlugin({
+        names: ['vendor'],
+        filename: 'vendor.js'
+      }),
       new ExtractTextPlugin("bundle.css"),
       new webpack.DefinePlugin({
         'process.env': {

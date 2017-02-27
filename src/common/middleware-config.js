@@ -10,14 +10,19 @@ const  loggerMiddleware = createLogger();
 
 //创建加入中间件的createStore函数
 //它提供的是位于 action 被发起之后，到达 reducer 之前的扩展点
+let configureStore;
+let env = process.env.NODE_ENV;
 
-// const configureStore = applyMiddleware(
-//     thunkMiddleware,
-//     loggerMiddleware
-// )(createStore);
-const configureStore = applyMiddleware(
+if(env=="production") {
+  configureStore = applyMiddleware(
     thunkMiddleware
-)(createStore);
+  )(createStore);
+}else{
+  configureStore = applyMiddleware(
+    thunkMiddleware,
+    loggerMiddleware
+  )(createStore);
+}
 
 //暴露store创建函数
 export default configureStore

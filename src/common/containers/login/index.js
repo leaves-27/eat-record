@@ -48,7 +48,7 @@ class Login extends Component{
     )
   }
   render(){
-    const { actions,login } = this.props;
+    const { actions,login,location } = this.props;
     let result;
 
     if(login.code && login.code!=0){
@@ -64,7 +64,7 @@ class Login extends Component{
 
     return (
       <div className>
-        <Header login={ login } loginout={ actions.loginout } />
+        <Header login={ login } loginout={ actions.loginout } location={location}/>
         { result }
       </div>
       

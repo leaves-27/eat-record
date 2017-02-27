@@ -1,11 +1,5 @@
 module.exports = {
-  /**
-   * Application configuration section
-   * http://pm2.keymetrics.io/docs/usage/application-declaration/
-   */
   apps : [
-
-    // First application
     {
       name      : "eat-record",
       script    : "./build/eat-record/server.js",
@@ -17,11 +11,6 @@ module.exports = {
       }
     }
   ],
-
-  /**
-   * Deployment section
-   * http://pm2.keymetrics.io/docs/usage/deployment/
-   */
   deploy : {
     production : {
       "user" : "leaves-27",
@@ -29,7 +18,7 @@ module.exports = {
       "ref"  : "origin/0225",
       "repo" : "https://github.com/leaves-27/eat-record.git",
       "path" : "/data/nodejs/eat-record",
-      "post-deploy" : "npm install && bower install && npm run prod"
+      "post-deploy" : "npm install && bower install && npm run prod && pm2 startOrRestart ecosystem.json --env production"
     }
   }
 }

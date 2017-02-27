@@ -8,6 +8,7 @@ import cookieParser from 'cookie-parser';
 import sesstion from 'express-session';
 import connectMongo  from 'connect-mongo';
 import flash from 'connect-flash';
+import jwt from 'jwt-simple';
 
 import React from 'react';
 import { createStore } from 'redux';
@@ -27,6 +28,7 @@ if(env=="production") {
 }else{
   settings = settingsDev
 }
+
 const config = JSON.parse(fs.readFileSync(settings.config_path));
 
 const accessLog = fs.createWriteStream('access.log',{flags:"a"});
@@ -38,6 +40,7 @@ const viewPath = path.join(__dirname,'views');
 
 app.set('views',viewPath);
 app.set('view engine','ejs');
+app.set('jwtTokenSecret',config.jwtTokenSecret);
 
 // app.use(logger('dev'));
 // app.use(logger({stream : accessLog}));
@@ -46,7 +49,6 @@ app.use(function(err,req,res,next){
   errorLog.write(meta + err.stack +'\n');
   next();
 });
-
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -67,10 +69,18 @@ app.use(sesstion({
   })
 }));
 
+// app.use(function(req, res, next) {
+//   res.setHeader('Access-Control-Allow-Origin', '*');
+//   res.setHeader('Access-Control-Allow-Methods', 'GET, POST');
+//   res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type, Authorization');
+//   next();
+// });
 
 app.use('/static',Express.static(config.static));
 // app.use(auth);
+// app.get('jwtTokenSecret')
 app.use('/',router);
+
 
 // error handlers
 app.use(function(req, res, next) {

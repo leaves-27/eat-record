@@ -114,7 +114,7 @@ class Backend extends Component{
     )
   }
   render(){
-    const { login,diet,actions } = this.props;
+    const { login,diet,actions,location } = this.props;
     let _self = this;
     let result;
 
@@ -136,7 +136,7 @@ class Backend extends Component{
 
     return (
       <div className="backend">
-        <Header login={ login } loginout={ actions.loginout } />
+        <Header login={ login } loginout={ actions.loginout } location={location} />
         { result }
       </div>
     );

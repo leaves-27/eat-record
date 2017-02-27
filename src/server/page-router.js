@@ -4,7 +4,6 @@ import Utils from './utils';
 
 export default (renderProps)=>{
   let location = renderProps.location;
-
   switch(location.pathname){
     case '/web/login':
       return  actionType.resetState();
@@ -16,6 +15,6 @@ export default (renderProps)=>{
       let date = location.query.date;
       return  asyncAction.getDetail("detail",date);
     default:
-      return {}
+      return  {};
   }
 }

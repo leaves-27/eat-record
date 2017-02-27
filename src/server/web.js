@@ -26,6 +26,25 @@ export default (req,res,next)=>{
       res.redirect(redirectLocation.pathname + redirectLocation.search);
     }else if(renderProps){
       const store = middlewareConfig(about);
+      const action = pageRouter(renderProps);
+      
+      let status = 0;
+      let token = (req.body && req.body.access_token) || (req.query && req.query.access_token) || req.headers['x-access-token'];
+      
+      if(token){
+        let decoded = jwt.decode(token,req.app.get('jwtTokenSecret'));
+        if(decoded.exp <= Date.now()) {
+          status = 0;
+        }else{
+          status = 1;
+          store.dispatch(actionType.updateToken(token));
+        } 
+      }else{
+        status = 0;
+      };
+
+      store.dispatch(actionType.setLoginStatus(status));
+
       store.subscribe(function(){
         const state = store.getState();
 
@@ -33,7 +52,6 @@ export default (req,res,next)=>{
           if(location.pathname=="/web/login"){
             //登录成功后，跳转到创建文章页面或跳转到相应页面
             let redirectUrl = "/web/backend";
-            console.log("location:",location);
             if(location.query && location.query.redirectUrl){
               redirectUrl = location.query.redirectUrl;
             }
@@ -44,7 +62,6 @@ export default (req,res,next)=>{
           if(location.pathname!="/web/login"){
             res.redirect("/web/login");
           }
-          // res.redirect(location.pathname+"?redirectUrl="+location.query.redirectUrl);
         }
 
         const __html__ = renderToString(
@@ -52,20 +69,11 @@ export default (req,res,next)=>{
             <RouterContext {...renderProps} />
           </Provider>
         );
-
+        
         res.status(200).end(page.main(__html__,state));
       });
 
-      const action = pageRouter(res,store,renderProps);
-
-      let status = 0;
-      if(req.session.user){
-        status = 1;
-      };
-      
-      store.dispatch(actionType.setLoginStatus(status));
       store.dispatch(action);
-      
     }else{
       res.status(404).end('Not found');
     }
