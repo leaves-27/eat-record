@@ -1,18 +1,18 @@
-module.exports = {
-  apps : [
+{
+  "apps" : [
     {
-      name      : "eat-record",
-      script    : "./build/eat-record/server.js",
-      env: {
-        COMMON_VARIABLE: "true"
+      "name"      : "eat-record",
+      "script"    : "./build/eat-record/server.js",
+      "env": {
+        "COMMON_VARIABLE": "true"
       },
-      env_production : {
-        NODE_ENV: "production"
+      "env_production" : {
+        "NODE_ENV": "production"
       }
     }
   ],
-  deploy : {
-    production : {
+  "deploy" : {
+    "production" : {
       "user" : "leaves-27",
       "host" : "funnyxiu.com",
       "ref"  : "origin/0225",
