@@ -13,6 +13,15 @@ export const error = (message, error = {
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>秀的饮食记录本</title>
   <link rel="stylesheet" href="/static/bundle.css" />
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?6bb26bc0960077c4ccaf8af5f9791f88";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
 </head>
 <body>
   <h1>${ message }</h1>
