@@ -77,8 +77,6 @@ app.use(sesstion({
 // });
 
 app.use('/static',Express.static(config.static));
-// app.use(auth);
-// app.get('jwtTokenSecret')
 app.use('/',router);
 
 

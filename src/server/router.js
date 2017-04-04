@@ -19,8 +19,8 @@ const loginValidation = (req,res,next)=>{
   }else{
     //未登录，返回未登录
     res.json({
-      code:4,
-      msg:"未登录"
+      code : 4,
+      msg : "未登录"
     })
   }
 }

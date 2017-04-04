@@ -13,7 +13,8 @@ export const actionTypesApp = createConstants(
   'DELETE_DIET',
   'CHANGE_USER',
   'RESET_STATE',
-  'SET_LOGIN_STATUS'
+  'SET_LOGIN_STATUS',
+  'UPDATE_TOKEN'
 );
 
 //action创建函数
@@ -88,6 +89,13 @@ export function updateStatus(status){
   return {
     type:actionTypesApp.NEXT,
     status:status
+  }
+}
+
+export function updateToken(token){
+  return {
+    type : actionTypesApp.UPDATE_TOKEN,
+    value : token
   }
 }
 

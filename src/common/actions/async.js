@@ -66,7 +66,6 @@ export function getDetail(key,date) {//key为获取的json节点数据的节点�
   return (dispatch, getState) => {
     const url = prefixUrl+"api/backend?date="+date;
     let token = getState().login.token;
-    // console.log(token);
     return dispatch(fetchData({
       url:url,
       key:key,

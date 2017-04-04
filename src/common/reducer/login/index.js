@@ -9,7 +9,8 @@ const initState = {
     name:"",
     password:""
   },
-  status:0
+  status:0,
+  token : ""
 };
 
 export default createReducer(initState,{
@@ -19,6 +20,11 @@ export default createReducer(initState,{
   [ actionTypesApp.SET_LOGIN_STATUS ]( state,action ){
     return Object.assign({},state,{
       status : action.value
+    });
+  },
+  [ actionTypesApp.UPDATE_TOKEN ]( state,action ){
+    return Object.assign({},state,{
+      token : action.value
     });
   },
   [ RECEIVE_POSTS ]( state, action ) {

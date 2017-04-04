@@ -13,7 +13,7 @@ Article.prototype.getAll = function(req, res, next){
         msg:err
       });
     };
-    console.log("list:",data);
+
     res.json({
       code:0,
       data:data

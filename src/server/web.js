@@ -4,6 +4,7 @@ import { match , RouterContext } from 'react-router';
 import { createLocation,createMemoryHistory } from 'history';
 import { Provider } from 'react-redux';
 import { combineReducers } from 'redux';
+import jwt from 'jwt-simple';
 
 import middlewareConfig from '../common/middleware-config';
 import createRoutes from './reate-routes';
@@ -29,7 +30,8 @@ export default (req,res,next)=>{
       const action = pageRouter(renderProps);
       
       let status = 0;
-      let token = (req.body && req.body.access_token) || (req.query && req.query.access_token) || req.headers['x-access-token'];
+      
+      let token = (req.body && req.body.token) || (req.query && req.query.token) || req.headers['x-access-token'];
       
       if(token){
         let decoded = jwt.decode(token,req.app.get('jwtTokenSecret'));
