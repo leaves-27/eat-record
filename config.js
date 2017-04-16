@@ -15,6 +15,7 @@ var compileJSConfig = {
   include: path.join(__dirname,"src")
 }
 
+
 var vendor = {
   jquery:path.join(__dirname,"bower_components/jquery/dist/jquery.min.js"),
   bootstrap:path.join(__dirname,"bower_components/bootstrap/dist/js/bootstrap.min.js")
