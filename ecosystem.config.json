@@ -22,11 +22,11 @@
     },
     "dev" : {
       "user" : "leaves-27",
-      "host" : "localhost",
+      "host" : "127.0.0.1",
       "ref"  : "origin/master",
       "repo" : "https://github.com/leaves-27/eat-record.git",
       "path" : "/data/nodejs/eat-record",
-      "post-deploy" : "npm install && sudo bower install --allow-root && npm run prod && pm2 startOrRestart ecosystem.config.json --env production"
+      "post-deploy" : "npm install && bower install --allow-root && npm run prod && pm2 startOrRestart ecosystem.config.json --env production"
     }
   }
 }
