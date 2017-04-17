@@ -25,7 +25,7 @@ export function fetchData(params) {
   const options = params.options || {};
 
   return dispatch => {
-    let token = params.token || "";
+    // let token = params.token || "";
 
     //在请求头中添加credentials:'include'
     let tempOptions = {
@@ -34,14 +34,14 @@ export function fetchData(params) {
 
     let tempHeaders;
 
-    if(token){
-      tempHeaders = {
-        'x-access-token': token
-      }
-    }
+    // if(token){
+    //   tempHeaders = {
+    //     'x-access-token': token
+    //   }
+    // }
     
     //在请求头中添加token
-    tempOptions.headers = options.headers ? Object.assign({},options.headers,tempHeaders) : tempHeaders;
+    // tempOptions.headers = options.headers ? Object.assign({},options.headers,tempHeaders) : tempHeaders;
     
     let newOptions = Object.assign({},options,tempOptions);
     let method = 'GET';

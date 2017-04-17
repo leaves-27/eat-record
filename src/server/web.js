@@ -31,7 +31,7 @@ export default (req,res,next)=>{
       
       let status = 0;
       
-      let token = (req.body && req.body.token) || (req.query && req.query.token) || req.headers['x-access-token'];
+      let token = (req.body && req.body.token) || (req.query && req.query.token) || req.headers['x-access-token'] || req.cookies['token'];
       
       if(token){
         let decoded = jwt.decode(token,req.app.get('jwtTokenSecret'));
@@ -39,7 +39,17 @@ export default (req,res,next)=>{
           status = 0;
         }else{
           status = 1;
-          store.dispatch(actionType.updateToken(token));
+          
+          let cookieOptions = {
+            expires : new Date(Date.now() + 0),
+            httpOnly : false,
+            maxAge : 0,
+            path : "/",
+            secure : false,
+            signed : false
+          };
+
+          res.cookie("token",token);
         } 
       }else{
         status = 0;

@@ -32,10 +32,20 @@ Login.prototype.post = function(req, res, next) {
       exp: expires
     },req.app.get('jwtTokenSecret'));
 
+    let cookieOptions = {
+      expires : new Date(Date.now() + 0),
+      httpOnly : false,
+      maxAge : 0,
+      path : "/",
+      secure : false,
+      signed : false
+    };
+
+    res.cookie("token",token);
+    
     res.json({
       code : 0,
       data:{
-        token : token,
         user: user
       }
     });

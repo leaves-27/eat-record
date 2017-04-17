@@ -5,7 +5,6 @@ import bodyParser from 'body-parser';
 import favicon from 'serve-favicon';
 import logger from 'morgan';
 import cookieParser from 'cookie-parser';
-import sesstion from 'express-session';
 import connectMongo  from 'connect-mongo';
 import flash from 'connect-flash';
 import jwt from 'jwt-simple';
@@ -33,7 +32,6 @@ const config = JSON.parse(fs.readFileSync(settings.config_path));
 
 const accessLog = fs.createWriteStream('access.log',{flags:"a"});
 const errorLog = fs.createWriteStream('error.log',{flags:"a"});
-const MongoStore = connectMongo(sesstion);
 const app = Express();
 const port = 3000;
 const viewPath = path.join(__dirname,'views');
@@ -54,27 +52,13 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(cookieParser());
-app.use(sesstion({
-  saveUninitialized : false,
-  resave : true,
-  secret : config.cookieSecret,
-  key : config.db,
-  cookie : { 
-    maxAge:1000*60*60*24*30
-  },
-  store : new MongoStore({
-    db:config.db,
-    host:config.host,
-    port:config.port
-  })
-}));
 
-// app.use(function(req, res, next) {
-//   res.setHeader('Access-Control-Allow-Origin', '*');
-//   res.setHeader('Access-Control-Allow-Methods', 'GET, POST');
-//   res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type, Authorization');
-//   next();
-// });
+app.use(function(req, res, next) {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST');
+  // res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type, Authorization');
+  next();
+});
 
 app.use('/static',Express.static(config.static));
 app.use('/',router);

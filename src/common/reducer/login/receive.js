@@ -6,8 +6,7 @@ export default (state,action)=>{
       if(action.data.code == 0) {
         return Object.assign({},state,{
           code:0,
-          status:1,
-          token:action.data.data.token
+          status:1
         });
       }else{
         return Object.assign({},state,{
@@ -20,8 +19,7 @@ export default (state,action)=>{
       if(action.data.code == 0) {
         return Object.assign({},state,{
           code:0,
-          status:0,
-          token:""
+          status:0
         });
       }else{
         return Object.assign({},state,{

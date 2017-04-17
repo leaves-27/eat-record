@@ -3,7 +3,7 @@ var ObjectId = require("objectid");
 var User = require('./models/user');
 
 module.exports = function(req, res, next) {
-  var token = (req.body && req.body.token) || (req.query && req.query.token) || req.headers['x-access-token'];
+  var token = (req.body && req.body.token) || (req.query && req.query.token) || req.headers['x-access-token'] ||  req.cookies['token'];
   if(token){
     try{
       var decoded = jwt.decode(token,req.app.get('jwtTokenSecret'));
