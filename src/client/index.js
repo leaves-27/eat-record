@@ -64,7 +64,7 @@ store.subscribe(function(){
 const history = syncHistoryWithStore(browserHistory,store);
 render(
   <Provider store={store}>
-    {createRoutes(history)}
+    { createRoutes(history) }
   </Provider>,
   document.getElementById('root')
 )

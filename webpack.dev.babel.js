@@ -6,7 +6,6 @@ var commonConfig = require("./config");
 var clientConfig = {
   entry:commonConfig.entry.client,
   resolve:commonConfig.resolve.client,
-  devtool:'cheap-source-map',
   module:{
     loaders:commonConfig.loaders.client
   },
@@ -17,8 +16,7 @@ var clientConfig = {
 var serverConfig = {
   entry : commonConfig.entry.server,
   node : commonConfig.nodeConfig,
-  target:'node',
-  devtool: 'cheap-source-map',
+  target :'node',
   module : {
     loaders : commonConfig.loaders.server
   },

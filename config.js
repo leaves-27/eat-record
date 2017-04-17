@@ -69,7 +69,7 @@ var getEndConfig = function(argv,clientConfig,serverConfig){
 }
 
 module.exports = {
-  env:env,
+  env : env,
   entry:{
     client : {
       app:['./src/client/index'],
