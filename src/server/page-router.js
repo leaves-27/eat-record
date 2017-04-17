@@ -5,13 +5,13 @@ import Utils from './utils';
 export default (renderProps)=>{
   let location = renderProps.location;
   switch(location.pathname){
-    case '/web/login':
+    case '/login':
       return  actionType.resetState();
-    case '/web/backend':
+    case '/backend':
       return  asyncAction.getDetail("diet_get",Utils.time.day);
-    case '/web/':
+    case '/':
       return  asyncAction.getList();
-    case '/web/detail/:date':
+    case '/detail/:date':
       let date = location.query.date;
       return  asyncAction.getDetail("detail",date);
     default:

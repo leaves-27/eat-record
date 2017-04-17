@@ -17,7 +17,7 @@ class List extends Component{
 
   getList(articles){
     let list = articles.map(function(item,index){
-      let link = "/web/detail/" +item.date;
+      let link = "/detail/" +item.date;
 
       return (
         <li key={index} className="list-group-item">

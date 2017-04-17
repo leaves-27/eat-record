@@ -6,8 +6,6 @@ git clone https://github.com/harttle/pm2-notify cd pm2-noti
 
 #面临的问题：
 
-1.代码分割后，产生的静态资源路径和页面路径冲突
-
 
 
 

@@ -34,8 +34,8 @@ store.subscribe(function(){
   const location = state.routing.locationBeforeTransitions;
 
   if(state.login.status==1) {
-    if(location.pathname=="/web/login"){
-      let redirectUrl = "/web/backend";
+    if(location.pathname=="/login"){
+      let redirectUrl = "/backend";
 
       if(location.query && location.query.redirectUrl){
         redirectUrl = location.query.redirectUrl;
@@ -49,8 +49,8 @@ store.subscribe(function(){
       });
     }
   }else{
-    if(location.pathname!="/web/login"){
-      let redirectUrl = "/web/login";
+    if(location.pathname!="/login"){
+      let redirectUrl = "/login";
       browserHistory.push({
         pathname:redirectUrl,
         query:{

@@ -10,12 +10,12 @@ export function validationPage(req, res, next){
     User.get(req.session.user.name,function(err,user){
       if (!user){
         req.session.user = null;
-        res.redirect("/web/login");
+        res.redirect("/login");
       };
 
       next();
     });
   }else{
-    res.redirect("/web/login");
+    res.redirect("/login");
   }
 }

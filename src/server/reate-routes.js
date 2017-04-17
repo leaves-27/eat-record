@@ -14,7 +14,7 @@ import Backend from '../common/containers/backend/index';
 export default (history) => {
   return (
     <Router history={history}>
-      <Route path="web" component={App}>
+      <Route path="/" component={App}>
         <IndexRoute  component={ List } />
         <Route path="detail/:date" component={ Detail } />
         <Route path="login" component={ Login } />

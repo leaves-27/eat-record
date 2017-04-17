@@ -21,6 +21,10 @@ export default (req,res,next)=>{
     routes: routes,
     location: location
   },function(err, redirectLocation, renderProps){
+    console.log("err:",err);
+    console.log("redirectLocation:",redirectLocation);
+    console.log("renderProps:",renderProps);
+
     if(err){
       res.status(500).end(`Internal Server Error ${err}`);
     }else if(redirectLocation){
@@ -51,9 +55,9 @@ export default (req,res,next)=>{
         const state = store.getState();
 
         if(state.login.status==1) {
-          if(location.pathname=="/web/login"){
+          if(location.pathname=="/login"){
             //登录成功后，跳转到创建文章页面或跳转到相应页面
-            let redirectUrl = "/web/backend";
+            let redirectUrl = "/backend";
             if(location.query && location.query.redirectUrl){
               redirectUrl = location.query.redirectUrl;
             }
@@ -61,8 +65,8 @@ export default (req,res,next)=>{
             res.redirect(redirectUrl);
           }
         }else{
-          if(location.pathname!="/web/login"){
-            res.redirect("/web/login");
+          if(location.pathname!="/login"){
+            res.redirect("/login");
           }
         }
 
@@ -71,8 +75,9 @@ export default (req,res,next)=>{
             <RouterContext {...renderProps} />
           </Provider>
         );
-        
-        res.status(200).end(page.main(__html__,state));
+
+        var cont = page.main(__html__,state);
+        res.status(200).end(cont);
       });
 
       store.dispatch(action);

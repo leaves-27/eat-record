@@ -19,7 +19,7 @@ export default class Header extends Component{
         <div className="navbar-collapse collapse" role="navigation">
           <ul className="nav navbar-nav hidden-sm">
             <li>
-              <Link to={{ pathname:"/web/backend",query:{token : token}  }} >创建文章</Link>
+              <Link to={{ pathname:"/backend",query:{token : token}  }} >创建文章</Link>
             </li>
           </ul>
           <ul className="nav navbar-nav navbar-right hidden-sm">
@@ -33,7 +33,7 @@ export default class Header extends Component{
       result = (
         <div className="navbar-collapse collapse" role="navigation">
           <ul className="nav navbar-nav navbar-right hidden-sm">
-            <li><a href="/web/login">登陆</a></li>
+            <li><a href="/login">登陆</a></li>
           </ul>
         </div>
       )
@@ -49,7 +49,7 @@ export default class Header extends Component{
               <span className="icon-bar"></span>
               <span className="icon-bar"></span>
             </button>
-            <Link to={{ pathname:"/web/",query:{token : token} }} className="navbar-brand hidden-sm">首页</Link>
+            <Link to={{ pathname:"/",query:{token : token} }} className="navbar-brand hidden-sm">首页</Link>
           </div>
           { result }
         </div>

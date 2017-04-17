@@ -26,7 +26,7 @@ const loginValidation = (req,res,next)=>{
 }
 
 //页面级验证及其响应
-router.get('/web/*',web);
+router.get(/^((?!api).)*$/,web);
 
 //接口级验证及响应
 router.post('/api/login',login.post);

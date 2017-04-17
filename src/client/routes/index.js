@@ -6,11 +6,11 @@ import React from 'react';
 import { Router } from 'react-router';
 
 const routeConfig = {
-  path : '/web',
+  path : '/',
   indexRoute : {
     getComponent : (nextState, cb)=>{
       require.ensure([],(require) => {
-        cb(null,require('../../common/containers/list')).default
+        cb(null,require('../../common/containers/list').default)
       },'list')
     }
   },

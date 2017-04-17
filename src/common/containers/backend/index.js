@@ -66,7 +66,7 @@ class Backend extends Component{
             <button type="button" className="btn btn-success btn-block" onClick={ _self.reload }>继续</button>
           </div>
           <div className="col-sm-6">
-            <Link to="/web/" className="btn btn-danger btn-block">查看提交</Link>
+            <Link to="/" className="btn btn-danger btn-block">查看提交</Link>
           </div>
         </div>
       </div>
