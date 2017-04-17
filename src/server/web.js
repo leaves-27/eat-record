@@ -21,10 +21,6 @@ export default (req,res,next)=>{
     routes: routes,
     location: location
   },function(err, redirectLocation, renderProps){
-    console.log("err:",err);
-    console.log("redirectLocation:",redirectLocation);
-    console.log("renderProps:",renderProps);
-
     if(err){
       res.status(500).end(`Internal Server Error ${err}`);
     }else if(redirectLocation){
