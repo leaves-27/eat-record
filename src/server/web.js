@@ -39,15 +39,8 @@ export default (req,res,next)=>{
           status = 0;
         }else{
           status = 1;
-          
-          let cookieOptions = {
-            expires : new Date(Date.now() + 1000*60*30),
-            httpOnly : false,
-            path : "/",
-            secure : false,
-            signed : false
-          };
 
+          var cookieOptions = { maxAge: 600000, httpOnly: true , path:'/' };
           res.cookie("token",token,cookieOptions);
         } 
       }else{
