@@ -81,7 +81,7 @@ module.exports = {
     client:{
       path : path.resolve(__dirname,`build/${jsonObj.name}/dist`),
       filename : 'app.js',
-      publicPath :"static/",
+      publicPath :"/static/",
       chunkFilename : '[name].js'
     },
     server:{
