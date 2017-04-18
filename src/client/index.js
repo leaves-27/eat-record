@@ -42,19 +42,20 @@ store.subscribe(function(){
       }
 
       browserHistory.push({
-        pathname:redirectUrl,
-        query:{
-          token:state.login.token
-        }
+        pathname:redirectUrl
       });
     }
   }else{
+    console.log("location.pathname:",location.pathname);
     if(location.pathname!="/login"){
       let redirectUrl = "/login";
+
+      console.log("location.pathname:","aa");
+
       browserHistory.push({
-        pathname:redirectUrl,
+        pathname : redirectUrl,
         query:{
-          redirectUrl:location.pathname
+          redirectUrl : location.pathname
         }
       });
     }
