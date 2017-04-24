@@ -21,22 +21,24 @@ var vendor = {
   bootstrap:path.join(__dirname,"bower_components/bootstrap/dist/js/bootstrap.min.js")
 };
 
+var compileImgs = { 
+  test: /\.(gif|jpg|png|woff|svg|eot|ttf)\??.*$/, 
+  loader: 'url-loader?limit=50000&name=[path][name].[ext]'
+};
+
 var clientLoaders = [{
   test: require.resolve(vendor.jquery),
   loader: 'expose?jQuery!expose?$'
 },
-{ 
-  test: /\.(gif|jpg|png|woff|svg|eot|ttf)\??.*$/, 
-  loader: 'url-loader?limit=50000&name=[path][name].[ext]'
-},
+compileImgs,
 compileJSConfig,
 {
   test: /\.css$/,
-  loader: ExtractTextPlugin.extract("style-loader","css-loader")
+  loader: ExtractTextPlugin.extract("style-loader","css?-url")
 },
 {
   test: /\.styl$/,
-  loader: ExtractTextPlugin.extract("style-loader","css-loader!stylus-loader")
+  loader: ExtractTextPlugin.extract("style-loader","css?-url!stylus-loader")
 }];
 
 var _externals = function() {
@@ -92,7 +94,7 @@ module.exports = {
   },
   loaders:{
     client : clientLoaders,
-    server :  [compileJSConfig]
+    server :  [compileImgs,compileJSConfig]
   },
   plugins:{
     client : [

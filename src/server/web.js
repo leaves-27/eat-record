@@ -12,6 +12,10 @@ import pageRouter from './page-router';
 import * as page  from './page';
 import about from '../common/reducer/index';
 import * as actionType from '../common/actions/index';
+import imgs57 from '../common/imgs/icon-57.jpg'
+import imgs72 from '../common/imgs/icon-72.jpg'
+import imgs114 from '../common/imgs/icon-114.jpg'
+import imgs144 from '../common/imgs/icon-144.jpg'
 
 export default (req,res,next)=>{
   const routes = createRoutes(createMemoryHistory());
@@ -74,7 +78,12 @@ export default (req,res,next)=>{
           </Provider>
         );
 
-        var cont = page.main(__html__,state);
+        var cont = page.main({
+          mise : imgs57,
+          small : imgs72,
+          middle : imgs114,
+          big : imgs144
+        },__html__,state);
         res.status(200).end(cont);
       });
 
