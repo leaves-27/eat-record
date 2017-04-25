@@ -40,6 +40,7 @@ app.set('views',viewPath);
 app.set('view engine','ejs');
 app.set('jwtTokenSecret',config.jwtTokenSecret);
 
+app.use(express.compress());
 // app.use(logger('dev'));
 // app.use(logger({stream : accessLog}));
 app.use(function(err,req,res,next){
