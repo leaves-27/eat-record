@@ -2,6 +2,7 @@ import path from 'path';
 import fs from 'fs';
 import Express from 'express';
 import bodyParser from 'body-parser';
+import compression from 'compression';
 import favicon from 'serve-favicon';
 import logger from 'morgan';
 import cookieParser from 'cookie-parser';
@@ -40,7 +41,7 @@ app.set('views',viewPath);
 app.set('view engine','ejs');
 app.set('jwtTokenSecret',config.jwtTokenSecret);
 
-app.use(express.compress());
+app.use(compression())
 // app.use(logger('dev'));
 // app.use(logger({stream : accessLog}));
 app.use(function(err,req,res,next){
