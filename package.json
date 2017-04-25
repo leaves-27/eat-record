@@ -7,7 +7,7 @@
   "scripts": {
     "mongodb": "mongod --dbpath '/Users/kk/tests/data'",
     "dev": "webpack --config webpack.dev.babel.js --compile server && webpack --config webpack.dev.babel.js --compile client",
-    "prod": "webpack --config webpack.dev.babel.js --compile server --p &&  webpack --config webpack.dev.babel.js --compile client --p",
+    "prod": "export NODE_ENV=production && webpack --config webpack.dev.babel.js --compile server -p &&  webpack --config webpack.dev.babel.js --compile client -p",
     "start": "node ./build/eat-record/server.js",
     "deployProdConfig": "pm2 deploy ecosystem.config.json production setup",
     "deployProd":"pm2 deploy ecosystem.config.json production",

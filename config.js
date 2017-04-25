@@ -74,8 +74,9 @@ module.exports = {
   env : env,
   entry:{
     client : {
-      app:['./src/client/index'],
-      vendor:["jquery","bootstrap",'react','react-dom','react-redux',"react-router","react-router-redux"] 
+      app :['./src/client/index'],
+      vendor : ["jquery","bootstrap"],
+      reacts : ['react','react-dom','react-redux',"react-router","react-router-redux"] 
     },
     server :'./src/server/index.js'
   },
@@ -99,8 +100,8 @@ module.exports = {
   plugins:{
     client : [
       new webpack.optimize.CommonsChunkPlugin({
-        names: ['vendor'],
-        filename: 'vendor.js'
+        name : ['vendor','reacts'],
+        filename: '[name].js'
       }),
       new ExtractTextPlugin("bundle.css"),
       new webpack.DefinePlugin({
