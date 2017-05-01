@@ -54,6 +54,13 @@ store.subscribe(function(){
           redirectUrl : location.pathname
         }
       });
+    }else{
+      if(state.register && state.register.status && state.register.status==1) {
+        let redirectUrl = "/login";
+        browserHistory.push({
+          pathname:redirectUrl
+        });
+      }
     }
   }
 });

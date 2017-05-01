@@ -11,6 +11,36 @@ import Message from '../../components/message/index';
 // import * as Validation from "../../reducer/validation";
 
 class Register extends Component{
+  validation(){
+    const { user,actions } = this.props;
+
+    if(!user.name){
+      console.log("用户名不能为空");
+      return ;
+    }
+
+    if(!user.password){
+      console.log("密码不能为空");
+      return ;
+    }
+
+    if(!user.repassword){
+      console.log("确认密码不能为空");
+      return ;
+    }
+
+    if(!user.email){
+      console.log("邮箱不能为空");
+      return ;
+    }
+
+    if(user.password == user.repassword){
+      console.log("两个密码不一致");
+      return ;
+    }
+
+    actions.postRegister();
+  }
   getRegistBox(){
     const { actions } = this.props;
     
@@ -25,25 +55,25 @@ class Register extends Component{
               <div className="form-group">
                 <label htmlFor="inputEmail3" className="col-sm-3 control-label">邮箱</label>
                 <div className="col-sm-9">
-                  <input type="email" className="form-control" name="email" id="email" placeholder="邮箱" />
+                  <input type="email" className="form-control" name="email" id="email" placeholder="邮箱" onChange={ actions.registerChangeUser.bind(this) }  />
                 </div>
               </div>
               <div className="form-group">
                 <label htmlFor="inputEmail3" className="col-sm-3 control-label">用户名</label>
                 <div className="col-sm-9">
-                  <input type="text" className="form-control" name="name" id="name" placeholder="用户名" />
+                  <input type="text" className="form-control" name="name" id="name" placeholder="用户名" onChange={ actions.registerChangeUser.bind(this) }  />
                 </div>
               </div>
               <div className="form-group">
                 <label htmlFor="password" className="col-sm-3 control-label" value="">密码</label>
                 <div className="col-sm-9">
-                  <input type="password" className="form-control" name="password"  id="password" placeholder="密码" />
+                  <input type="password" className="form-control" name="password"  id="password" placeholder="密码" onChange={ actions.registerChangeUser.bind(this) } />
                 </div>
               </div>
               <div className="form-group">
                 <label htmlFor="repassword" className="col-sm-3 control-label" value="">确认密码</label>
                 <div className="col-sm-9">
-                  <input type="password" className="form-control" name="repassword"  id="repassword" placeholder="确认密码" />
+                  <input type="password" className="form-control" name="repassword"  id="repassword" placeholder="确认密码" onChange={ actions.registerChangeUser.bind(this) }  />
                 </div>
               </div>
               <div className="form-group">
@@ -76,6 +106,7 @@ const mapStateToProps = (state,ownProps) => { //将store中特定的值绑定到
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     actions: bindActionCreators({
+      registerChangeUser : actionType.registerChangeUser,
       postRegister : asyncAction.postRegister
     },dispatch)
   };

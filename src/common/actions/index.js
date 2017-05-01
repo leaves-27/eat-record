@@ -15,7 +15,9 @@ export const actionTypesApp = createConstants(
   'RESET_STATE',
   'SET_LOGIN_STATUS',
   'UPDATE_TOKEN',
-  'DEFAULT'
+  'DEFAULT',
+  'REGISTER_CHANGE_USER',
+  'VALIDATE'
 );
 
 //action创建函数
@@ -53,6 +55,23 @@ export function inputGroup(pIndex,cIndex,_this){
 export function changeUser(_this){
   return {
     type:actionTypesApp.CHANGE_USER,
+    target:_this.target
+  }
+}
+
+export function validate(status,msg){
+  return {
+    type:actionTypesApp.VALIDATE,
+    data:{
+      status : status,
+      msg : msg
+    }
+  }
+}
+
+export function registerChangeUser(_this){
+  return {
+    type:actionTypesApp.REGISTER_CHANGE_USER,
     target:_this.target
   }
 }
