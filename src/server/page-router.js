@@ -24,6 +24,6 @@ export default (renderProps)=>{
       let date = location.query.date;
       return  asyncAction.getDetail("detail",date);
     default:
-      return  {};
+      return  actionType.getDefault();
   }
 }

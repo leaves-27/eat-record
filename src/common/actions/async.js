@@ -116,3 +116,30 @@ export function loginout(){
     }))
   }
 }
+
+
+export function postRegister(){
+  let key = "register";
+
+  return (dispatch, getState) => {
+    const url = prefixUrl+"api/register";
+
+    let state = getState();
+    let options = {
+      method:'POST',
+      headers:{
+        'Accept': 'application/json',
+        'Content-Type': 'application/json;charset=utf-8', 
+      },
+      body : JSON.stringify({
+        data : state.register.user
+      })
+    };
+
+    return dispatch(fetchData({
+      url:url,
+      key:key,
+      options:options
+    }))
+  }
+}

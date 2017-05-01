@@ -14,7 +14,8 @@ export const actionTypesApp = createConstants(
   'CHANGE_USER',
   'RESET_STATE',
   'SET_LOGIN_STATUS',
-  'UPDATE_TOKEN'
+  'UPDATE_TOKEN',
+  'DEFAULT'
 );
 
 //action创建函数
@@ -102,5 +103,11 @@ export function updateToken(token){
 export function deleteDiet(status){
   return {
     type:actionTypesApp.DELETE_DIET
+  }
+}
+
+export function getDefault(index){
+  return {
+    type : actionTypesApp.DEFAULT
   }
 }

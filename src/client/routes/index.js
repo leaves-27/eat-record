@@ -23,6 +23,7 @@ const routeConfig = {
     require('./login'),
     require('./detail'),
     require('./backend'),
+    require('./register'),
     require('./404')
   ]
 }

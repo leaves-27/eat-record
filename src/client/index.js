@@ -46,12 +46,8 @@ store.subscribe(function(){
       });
     }
   }else{
-    console.log("location.pathname:",location.pathname);
-    if(location.pathname!="/login"){
+    if(location.pathname!="/login" && location.pathname!="/register"){
       let redirectUrl = "/login";
-
-      console.log("location.pathname:","aa");
-
       browserHistory.push({
         pathname : redirectUrl,
         query:{

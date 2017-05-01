@@ -10,6 +10,7 @@ import List from '../common/containers/list/index';
 import Login from '../common/containers/login/index';
 import Detail from '../common/containers/detail/index';
 import Backend from '../common/containers/backend/index';
+import Register from '../common/containers/register/index';
 
 export default (history) => {
   return (
@@ -19,6 +20,7 @@ export default (history) => {
         <Route path="detail/:date" component={ Detail } />
         <Route path="login" component={ Login } />
         <Route path="backend" component={ Backend } />
+        <Route path="register" component={ Register } />
       </Route>
     </Router>
   )
