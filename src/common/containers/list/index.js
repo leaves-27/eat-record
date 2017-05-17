@@ -45,7 +45,7 @@ class List extends Component{
 
 const mapStateToProps = (state,ownProps) => { //将store中特定的值绑定到子组件上
   return {
-    articles:state.articles,
+    articles : state.articles,
     login : state.login
   };
 };

@@ -31,7 +31,6 @@ export default (req,res,next)=>{
       res.redirect(redirectLocation.pathname + redirectLocation.search);
     }else if(renderProps){
       const store = middlewareConfig(about);
-      const action = pageRouter(renderProps);
       
       let status = 0;
       
@@ -50,8 +49,6 @@ export default (req,res,next)=>{
       }else{
         status = 0;
       };
-
-      store.dispatch(actionType.setLoginStatus(status));
 
       store.subscribe(function(){
         const state = store.getState();
@@ -87,7 +84,7 @@ export default (req,res,next)=>{
         res.status(200).end(cont);
       });
 
-      store.dispatch(action);
+      store.dispatch(actionType.setLoginStatus(status));
     }else{
       res.status(404).end('Not found');
     }
