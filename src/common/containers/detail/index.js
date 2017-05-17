@@ -9,9 +9,17 @@ import * as actionType from '../../actions/index';
 import * as asyncAction from '../../actions/async';
 
 class Detail extends Component{
-  componentDidMount(){
+  constructor(props){
+    super(props)
+  }
+  
+  static fetchData(state){
     const { actions } = this.props;
     actions.getDetail("detail",this.props.params.date);
+  }
+
+  componentDidMount(){
+    this.constructor.fetchData(this.props);
   }
   getNewFieldset(fieldsets){
     let _self = this;

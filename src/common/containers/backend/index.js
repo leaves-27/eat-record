@@ -14,10 +14,16 @@ import * as actionType from '../../actions/index';
 import * as asyncAction from '../../actions/async';
 
 class Backend extends Component{
-  
-  componentDidMount(){
+  constructor(props){
+    super(props)
+  }
+  static fetchData(state){
     const { actions } = this.props;
     actions.getDetail("diet_get",Utils.time.day);
+  }
+  
+  componentDidMount(){
+    this.constructor.fetchData(this.props);
   }
 
   getFieldset(temp){

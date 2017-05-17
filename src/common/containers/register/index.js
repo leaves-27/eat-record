@@ -11,6 +11,10 @@ import Message from '../../components/message/index';
 // import * as Validation from "../../reducer/validation";
 
 class Register extends Component{
+  constructor(props){
+    super(props)
+  }
+  
   validation(){
     const { user,actions } = this.props;
 

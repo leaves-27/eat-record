@@ -107,7 +107,13 @@ module.exports = {
       new webpack.DefinePlugin({
         'process.env': {
           'NODE_ENV': "'"+env+"'"
-        }
+        },
+        '_SERVER_' : false
+      })
+    ],
+    server:[
+      new webpack.DefinePlugin({
+        '_SERVER_' : true
       })
     ]
   },

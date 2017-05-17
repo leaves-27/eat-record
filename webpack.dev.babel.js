@@ -21,6 +21,7 @@ var serverConfig = {
     loaders : commonConfig.loaders.server
   },
   externals : commonConfig._externals(),
+  plugins : commonConfig.plugins.server,
   output: commonConfig.outPath.server
 };
 

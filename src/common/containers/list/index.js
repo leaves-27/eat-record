@@ -10,9 +10,16 @@ import Header from '../../components/header/index';
 import Message from '../../components/message/index';
 
 class List extends Component{
-  componentDidMount(){
+  constructor(props){
+    super(props)
+  }
+  
+  static fetchData(state){
     const { actions } = this.props;
     actions.getList("articles");
+  }
+  componentDidMount(){
+    this.constructor.fetchData(this.props);
   }
 
   getList(articles){

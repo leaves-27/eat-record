@@ -6,7 +6,7 @@ import { syncHistoryWithStore } from 'react-router-redux';
 
 import about from '../common/reducer/index';
 import middlewareConfig from '../common/middleware-config';
-import createRoutes from './routes';
+import createRoutes from '../common/routes';
 
 import css from '../../bower_components/bootstrap/dist/css/bootstrap.min.css'
 import stylus from './index.styl';

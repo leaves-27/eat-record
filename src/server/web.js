@@ -7,8 +7,7 @@ import { combineReducers } from 'redux';
 import jwt from 'jwt-simple';
 
 import middlewareConfig from '../common/middleware-config';
-import createRoutes from './reate-routes';
-import pageRouter from './page-router';
+import createRoutes from '../common/routes';
 import * as page  from './page';
 import about from '../common/reducer/index';
 import * as actionType from '../common/actions/index';
@@ -16,6 +15,30 @@ import imgs57 from '../common/imgs/icon-57.jpg'
 import imgs72 from '../common/imgs/icon-72.jpg'
 import imgs114 from '../common/imgs/icon-114.jpg'
 import imgs144 from '../common/imgs/icon-144.jpg'
+
+const runFetchData = (renderProps)=>{
+  const route = renderProps.routes[renderProps.routes.length - 1];
+  const state = this.store.getState();
+
+  let taskList = [];
+
+  renderProps.components.forEach((component,idx)=>{
+    if(component && component.WrappedComponent && component.WrappedComponent.fetchData) {
+      try{
+        let fetchData = component.WrappedComponent.fetchData(state,this.store.dispatch);
+        if(typeof fetchData === "object" && fetchData.promise) {
+          taskList.push(fetchData.always(()=>{
+            console.log("fetchData done from:" + component.displayName)
+          }))
+        }
+      }catch(e){
+        console.log("error when fetchData from:" + component.displayName + ":" + e)
+      }
+    }
+  });
+
+  return $.whenAll.apply(null,taskList);
+}
 
 export default (req,res,next)=>{
   const routes = createRoutes(createMemoryHistory());
@@ -68,6 +91,10 @@ export default (req,res,next)=>{
             res.redirect("/login");
           }
         }
+
+        
+
+        runFetchData(renderProps)
 
         const __html__ = renderToString(
           <Provider store={store}>

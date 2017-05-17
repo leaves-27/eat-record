@@ -11,9 +11,17 @@ import Message from '../../components/message/index';
 // import * as Validation from "../../reducer/validation";
 
 class Login extends Component{
-  componentDidMount(){
+  constructor(props){
+    super(props)
+  }
+  
+  static fetchData(state){
     const { actions } = this.props;
     actions.resetState();
+  }
+
+  componentDidMount(){
+    this.constructor.fetchData(this.props);
   }
   getLoginBox(login,actions){
     return (
