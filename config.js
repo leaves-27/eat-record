@@ -95,7 +95,17 @@ module.exports = {
   },
   loaders:{
     client : clientLoaders,
-    server :  [compileImgs,compileJSConfig]
+    server :  [
+      compileImgs,
+      compileJSConfig,
+      {
+        test: /\.styl$/,
+        loaders: [
+          'css/locals?modules&camelCase&importLoaders=1&localIdentName=[hash:base64:8]',
+          'stylus-loader'
+        ]
+      }
+    ]
   },
   plugins:{
     client : [
