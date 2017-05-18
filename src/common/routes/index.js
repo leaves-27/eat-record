@@ -14,16 +14,16 @@ const routeConfig = {
   path : '/',
   indexRoute : {
     getComponent : (nextState, cb)=>{
-      // requireComponent(cb,'../containers/list','list')
+      requireComponent(cb,'../containers/list','list')
       console.log("_SERVER_：",_SERVER_)
-      if(_SERVER_) {
-        console.log("i am server")
-        cb(null, require('../containers/list').default)
-      }else{
-        require.ensure([], (require) => {
-          cb(null, require('../containers/list').default)
-        },'list')
-      }
+      // if(_SERVER_) {
+      //   console.log("i am server")
+      //   cb(null, require('../containers/list').default)
+      // }else{
+      //   require.ensure([], (require) => {
+      //     cb(null, require('../containers/list').default)
+      //   },'list')
+      // }
     }
   },
   component : require('../containers/app').default,
