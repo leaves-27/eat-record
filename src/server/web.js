@@ -42,13 +42,13 @@ const runFetchData = (renderProps)=>{
 
 export default (req,res,next)=>{
   const routes = createRoutes(createMemoryHistory());
-  const location = createLocation(req.url);
+  // const location = createLocation(req.url);
   console.log("createRoutes:",createRoutes);
   console.log("routes:",routes);
-  console.log("location:",location);
+
   match({
     routes: routes,
-    location: location
+    location: req.url
   },function(err, redirectLocation, renderProps){
     console.log("err:",err);
     console.log("redirectLocation:",redirectLocation);
