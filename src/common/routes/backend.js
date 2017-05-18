@@ -1,9 +1,9 @@
-import { requireComponent } from '../../common/utils';
+import { requireComponent } from '../utils';
 
 module.exports = {
   path: 'backend',
   getComponent:(nextState, cb) =>{
-    requireComponent(cb,'../../common/containers/backend','backend')
+    requireComponent(cb,'../containers/backend','backend')
     
     // if(_SERVER_) {
     //   cb(null, require('../../common/containers/backend').default)

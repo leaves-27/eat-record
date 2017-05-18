@@ -1,9 +1,9 @@
-import { requireComponent } from '../../common/utils';
+import { requireComponent } from '../utils';
 
 module.exports = {
   path: 'list',
   getComponent : (nextState, cb) =>{
-    requireComponent(cb,'../../common/containers/list','list')
+    requireComponent(cb,'../containers/list','list')
     // require.ensure([],(require) => {
     //   cb(null,require('../../common/containers/list').default)
     // },'list')

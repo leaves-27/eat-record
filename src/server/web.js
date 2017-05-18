@@ -43,16 +43,22 @@ const runFetchData = (renderProps)=>{
 export default (req,res,next)=>{
   const routes = createRoutes(createMemoryHistory());
   const location = createLocation(req.url);
-  
+  console.log("createRoutes:",createRoutes);
+  console.log("routes:",routes);
+  console.log("location:",location);
   match({
     routes: routes,
     location: location
   },function(err, redirectLocation, renderProps){
+    console.log("err:",err);
+    console.log("redirectLocation:",redirectLocation);
+    console.log("renderProps:",renderProps);
     if(err){
       res.status(500).end(`Internal Server Error ${err}`);
     }else if(redirectLocation){
       res.redirect(redirectLocation.pathname + redirectLocation.search);
     }else if(renderProps){
+      
       const store = middlewareConfig(about);
       
       let status = 0;
