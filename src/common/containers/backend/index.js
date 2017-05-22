@@ -17,6 +17,7 @@ class Backend extends Component{
   constructor(props){
     super(props)
   }
+  
   static fetchData(state){
     const { actions } = this.props;
     actions.getDetail("diet_get",Utils.time.day);

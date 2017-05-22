@@ -3,53 +3,51 @@
  */
 
 import React from 'react';
-// import { Router } from 'react-router';
+import { Router,Route, IndexRoute,Redirect } from 'react-router';
 
 import App from '../containers/app';
 
 import { requireComponent } from '../utils';
-import { Router,Route, IndexRoute,Redirect } from 'react-router';
 
-// const routeConfig = {
-//   path : '/',
-//   indexRoute : {
-//     getComponent : (nextState, cb)=>{
-//       requireComponent(cb,'../containers/list','list')
-//       console.log("_SERVER_：",_SERVER_)
-//       // if(_SERVER_) {
-//       //   console.log("i am server")
-//       //   cb(null, require('../containers/list').default)
-//       // }else{
-//       //   require.ensure([], (require) => {
-//       //     cb(null, require('../containers/list').default)
-//       //   },'list')
-//       // }
-//     }
-//   },
-//   component : require('../containers/app').default,
-//   childRoutes : [
-//     require('./login'),
-//     require('./detail'),
-//     require('./backend'),
-//     require('./register'),
-//     require('./404')
-//   ]
-// }
 const routeConfig = {
-  path: '/',
-  getComponents(nextState, cb) {
-    cb(null, require('../containers/app').default)
+  path : '/',
+  indexRoute : {
+    getComponent : (nextState, cb)=>{
+      requireComponent(cb,'../containers/list','list')
+      console.log("_SERVER_：",_SERVER_)
+    }
   },
-  getIndexRoute(nextState, cb) {
-    cb(null,{
-      component: require('../containers/list').default,
-    })
-  }
+  component : require('../containers/app').default,
+  childRoutes : [
+    require('./login'),
+    require('./detail'),
+    require('./backend'),
+    require('./register'),
+    require('./404')
+  ]
+}
+
+let router = null;
+
+if(_SERVER_){
+  router = (
+    <Router history={history}>
+      <Route path="/" component={App}>
+        <IndexRoute  component={ List } />
+        <Route path="detail/:date" component={ Detail } />
+        <Route path="login" component={ Login } />
+        <Route path="backend" component={ Backend } />
+        <Route path="register" component={ Register } />
+      </Route>
+    </Router>
+  )
+}else{
+  router = (
+    <Router history={history} routes={routeConfig} />
+  )
 }
 
 export default (history) => {
-  return (
-    <Router history={history} routes={routeConfig} />
-  )
+  return router;
 };
 

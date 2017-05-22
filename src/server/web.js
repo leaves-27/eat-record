@@ -26,18 +26,18 @@ const runFetchData = (renderProps)=>{
     if(component && component.WrappedComponent && component.WrappedComponent.fetchData) {
       try{
         let fetchData = component.WrappedComponent.fetchData(state,this.store.dispatch);
-        if(typeof fetchData === "object" && fetchData.promise) {
-          taskList.push(fetchData.always(()=>{
-            console.log("fetchData done from:" + component.displayName)
-          }))
-        }
+        // if(typeof fetchData === "object" && fetchData.promise) {
+        //   taskList.push(fetchData.always(()=>{
+        //     console.log("fetchData done from:" + component.displayName)
+        //   }))
+        // }
       }catch(e){
         console.log("error when fetchData from:" + component.displayName + ":" + e)
       }
     }
   });
 
-  return $.whenAll.apply(null,taskList);
+  // return $.whenAll.apply(null,taskList);
 }
 
 export default (req,res,next)=>{
@@ -98,9 +98,8 @@ export default (req,res,next)=>{
           }
         }
 
-        
-
-        runFetchData(renderProps)
+      
+        // runFetchData(renderProps)
 
         const __html__ = renderToString(
           <Provider store={store}>
