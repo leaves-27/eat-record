@@ -13,7 +13,7 @@ import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './index.styl';
 
-const store = middlewareConfig(about,window.__INITIAL_STATE__);
+const store = middlewareConfig(about,window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
 /*
   ** 请求成功后发生跳转的情况一般为：
