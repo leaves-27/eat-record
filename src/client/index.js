@@ -8,11 +8,10 @@ import about from '../common/reducer/index';
 import middlewareConfig from '../common/middleware-config';
 import createRoutes from './routes';
 
-import css from '../../bower_components/bootstrap/dist/css/bootstrap.min.css'
-import stylus from './index.styl';
-
 import $ from 'jquery'
 import 'bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css'
+import './index.styl';
 
 const store = middlewareConfig(about,window.__INITIAL_STATE__);
 
@@ -29,6 +28,7 @@ const store = middlewareConfig(about,window.__INITIAL_STATE__);
   ** 接口请求数据时返回当前未登录：
   ** 未登录的情况下，返回值code为4。
   **/
+
 store.subscribe(function(){
   const state = store.getState();
   const location = state.routing.locationBeforeTransitions;

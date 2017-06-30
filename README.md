@@ -13,18 +13,10 @@
 git clone https://github.com/harttle/pm2-notify cd pm2-noti
 3、数据库缓存添加；
 
-#面临的问题：
-1.用户名
-2.密码
 
-users: 
-  name:
-  password:
+# request
 
-articles:
-  fieldsets:
-  date:
-  userId:
+1.请求如何的action如何和reducer一一对应
 
 
 

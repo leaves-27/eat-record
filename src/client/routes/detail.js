@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   path: 'detail/:date',
   getComponent : (nextState, cb) =>{
     require.ensure([], (require) => {
