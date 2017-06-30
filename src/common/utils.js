@@ -15,11 +15,6 @@ export function createReducer(initialState, reducerMap){
   return (state = initialState, action)=>{
     const reducer = reducerMap[action.type];
     return reducer ? reducer(state, action) : state;
-    // if (reducerMap.hasOwnProperty(action.type)) {
-    //   return reducerMap[action.type](state,action);
-    // }else{
-    //   return state;
-    // }
   };
 }
 
