@@ -9,7 +9,7 @@ var env = process.env.NODE_ENV;
 
 var config = {
   entry : {
-    app :['./src/client/index'],
+    app :['./src/index'],
     vendor : ["jquery","bootstrap"],
     reacts : ['react','react-dom','react-redux',"react-router","react-router-redux"] 
   },

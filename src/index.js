@@ -4,8 +4,8 @@ import { Provider } from 'react-redux';
 import { match,browserHistory} from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 
-import about from '../common/reducer/index';
-import middlewareConfig from '../common/middleware-config';
+import about from './reducer/index';
+import middlewareConfig from './middleware-config';
 import createRoutes from './routes';
 
 import $ from 'jquery'

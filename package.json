@@ -5,12 +5,7 @@
   "author": "leaves-27",
   "license": "ISC",
   "scripts": {
-    "mongodb": "mongod --dbpath '/Users/kk/tests/data'",
-    "dev": "cross-env NODE_ENV=development webpack-dev-server --hot",
-    "deployProdConfig": "pm2 deploy ecosystem.config.json production setup",
-    "deployProd": "pm2 deploy ecosystem.config.json production",
-    "deployDevConfig": "pm2 deploy ecosystem.config.json dev setup",
-    "deployDev": "pm2 deploy ecosystem.config.json dev"
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --hot"
   },
   "dependencies": {
     "body-parser": "~1.13.2",
