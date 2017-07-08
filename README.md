@@ -1,26 +1,91 @@
-# 业务设想
-1.账户系统：
-(1)每个人独立的列表页、发布文章页；
-(2)注册账号页面；
-(3)数据分析；
-(4)添加统计；
-
-2.账户管理系统；
-
 # 尚需解决的问题：
 1.请求的action如何和reducer的state一一对应
 
-# 业务
+# state
 
-login
-register
+## 业务分析
+login:
+  name:
+  pwd:
+  verityCode:
 
-list:
-  articles:
-  login:
-detail:
-  articles:
-backend:
+register:
+  name:
+  pwd:
+  repwd:
+  email:
+
+list :
+  title :
+  date :
+
+detail :
+  article :
+  
+backend :
+  tempArticle :
+
+## 最终的state
+list:[]
+currentScanArticle : id
+tempArticle:{}
+user : {
+  email:"",
+  name : "",
+  pwd : "",
+  verityCode : ""
+}
+
+login : {
+  isFetching : false, 
+  msg : "",
+  isLogin : ""
+}
+
+发出请求:
+请求成功:
+请求错误:
+
+# action
+
+setName:
+setPwd:
+setVerityCode:
+
+setIsLogin:
+  request:
+  response:
+
+setList:
+  getList:
+  request:
+  response:
+  
+  
+getDetail:
+
+
+setTempArticle:
+  getDetail:
+    request:
+    response:
+
+  addNewGroup
+  INPUT_GROUP
+  DELETE_GROUP
+  
+  ADD_FIELDSET
+  DELETE_FIELDSET
+
+
+  
+
+
+
+
+
+
+
 
 
 

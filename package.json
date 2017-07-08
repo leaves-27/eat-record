@@ -5,7 +5,8 @@
   "author": "leaves-27",
   "license": "ISC",
   "scripts": {
-    "dev": "cross-env NODE_ENV=development webpack-dev-server --hot"
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --hot",
+    "build": "cross-env NODE_ENV=production webpack --progress"
   },
   "dependencies": {
     "body-parser": "~1.13.2",

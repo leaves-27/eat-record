@@ -1,6 +1,6 @@
 export default  {
   path: 'list',
-  getComponent : (nextState, cb) =>{
+  getComponent : (location, cb) =>{
     require.ensure([],(require) => {
       cb(null,require('../containers/list').default)
     },'list')

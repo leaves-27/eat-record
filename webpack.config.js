@@ -65,7 +65,10 @@ var config = {
   },
   devServer: {
     historyApiFallback: true,
-    noInfo: true
+    hot: true,
+    noInfo: true,
+    filename: 'static/[name].[chunkhash:8].js',
+    disableHostCheck: true
   },
   performance: {
     hints: false

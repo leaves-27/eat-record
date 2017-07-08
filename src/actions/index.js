@@ -7,14 +7,17 @@ export const actionTypesApp = createConstants(
   'INPUT_GROUP',
   'ADD_FIELDSET',
   'DELETE_FIELDSET',
-  'BACK',
-  'GET_DETAIL',
-  'NEXT',
-  'DELETE_DIET',
-  'CHANGE_USER',
-  'RESET_STATE',
-  'SET_LOGIN_STATUS',
   'UPDATE_TOKEN',
+  'CHANGE_USER',
+  'SET_LOGIN_STATUS',
+
+  'GET_DETAIL',
+  'BACK',
+  'RESET_STATE',
+  'NEXT',
+
+  'DELETE_DIET',
+
   'DEFAULT',
   'REGISTER_CHANGE_USER',
   'VALIDATE'
