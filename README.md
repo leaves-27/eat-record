@@ -77,6 +77,9 @@ setTempArticle:
   ADD_FIELDSET
   DELETE_FIELDSET
 
+state设计：
+路由跳转：
+路由授权：
 
   
 

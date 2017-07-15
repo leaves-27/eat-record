@@ -11,6 +11,10 @@ import * as actionTypesApp from '../../actions/user';
 // import * as Validation from "../../reducer/validation";
 
 class Login extends Component{
+  constructor(props, context) {
+     super(...arguments)
+  }
+
   getError(request){
     if(request && request.login && request.login.errorMsg) {
       return (
@@ -48,11 +52,9 @@ class Login extends Component{
     const { actions,login } = this.props;
     let result;
 
-    if(login.request && login.request.isLogin){
-      this.context.router("/list")
+    if(login.request && login.request.login && login.request.login.isLogin){
+      this.context.router.push("/list")
     }
-
-    console.log("login.request:",login.request)
 
     return (
       <div className>
@@ -109,5 +111,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     },dispatch)
   };
 };
+
+Login.contextTypes = {
+    router: PropTypes.object
+}
 
 export default connect(mapStateToProps,mapDispatchToProps)(Login);
