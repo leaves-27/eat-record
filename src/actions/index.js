@@ -39,21 +39,6 @@ export function setLoginStatus(value){
 }
 
 
-export function addGroup(index){
-  return {
-    type:actionTypesApp.ADD_GROUP,
-    index:index
-  }
-}
-
-export function inputGroup(pIndex,cIndex,_this){
-  return {
-    type:actionTypesApp.INPUT_GROUP,
-    pIndex:pIndex,
-    cIndex:cIndex,
-    target:_this.target
-  }
-}
 
 export function changeUser(_this){
   return {
@@ -79,29 +64,6 @@ export function registerChangeUser(_this){
   }
 }
 
-
-export function deleteGroup(pIndex,cIndex){
-  return {
-    type:actionTypesApp.DELETE_GROUP,
-    pIndex:pIndex,
-    cIndex:cIndex
-  }
-}
-
-export function addFieldset(index){
-  return {
-    type:actionTypesApp.ADD_FIELDSET,
-    index:index
-  }
-}
-
-export function deleteFieldset(index){
-  return {
-    type:actionTypesApp.DELETE_FIELDSET,
-    index:index
-  }
-}
-
 export function getBack(){
   return {
     type:actionTypesApp.BACK
@@ -119,12 +81,6 @@ export function updateToken(token){
   return {
     type : actionTypesApp.UPDATE_TOKEN,
     value : token
-  }
-}
-
-export function deleteDiet(status){
-  return {
-    type:actionTypesApp.DELETE_DIET
   }
 }
 

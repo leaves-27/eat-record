@@ -3,9 +3,8 @@ import { routerReducer as routing } from 'react-router-redux';
 
 import login from './login/index';
 import list from './list/index';
-
-// import tempArticle from './temp-article/index';
 import detail from './detail/index';
+import backend from './backend/index';
 
 // import register from './register/index';
 
@@ -21,7 +20,8 @@ export default combineReducers({
   routing,
   login,
   list,
-  detail
+  detail,
+  backend
 });
 
 

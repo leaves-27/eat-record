@@ -3,15 +3,16 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 
-import Header from '../../components/header/index';
-import Group from '../../components/group/index';
-import Message from '../../components/message/index';
+// import Header from '../../components/header/index';
+// import Message from '../../components/message/index';
 // import Utils from '../../utils';
+// import * as asyncAction from '../../actions/async';
 
+import Group from '../../components/group/index';
 import Modal from '../../components/modal/index';
 
-import * as actionType from '../../actions/index';
-import * as asyncAction from '../../actions/async';
+import * as actionType from '../../actions/backend';
+
 
 class Backend extends Component{
   
@@ -113,31 +114,31 @@ class Backend extends Component{
       </div>
     )
   }
-  render(){
-    const { login,diet,actions,location } = this.props;
-    let _self = this;
-    let result;
 
-    if (diet.code && diet.code!=0) {
-      let msg = "数据获取失败，请稍后刷新页面重新获取数据";
-
-      if(diet.msg){
-        msg = diet.msg;
-      }
-
-      result = (
-        <Message msg={ msg } />
-      )
-    }else if(diet.step == 2){
+  getResult(){
+    const { backend } = this.props;
+    let result = "";
+    
+    if(backend.step == 2){
       result = this.getStep2();
     }else{
-      result = this.getStep1(login,diet.fieldsets,actions);
+      result = this.getStep1(backend.fieldsets);
     }
+
+    return result;
+  }
+
+  render(){
+    // return (
+    //   <div className="backend">
+    //     <Header login={ login } loginout={ actions.loginout } location={location} />
+    //     { result }
+    //   </div>
+    // );
 
     return (
       <div className="backend">
-        <Header login={ login } loginout={ actions.loginout } location={location} />
-        { result }
+        { this.getResult() }
       </div>
     );
   }
@@ -145,8 +146,7 @@ class Backend extends Component{
 
 const mapStateToProps = (state,ownProps) => { //将store中特定的值绑定到子组件上
   return {
-    diet : state.diet,
-    login : state.login
+    backend : state.backend
   };
 };
 
@@ -157,9 +157,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
       addGroup : actionType.addGroup,
       deleteGroup : actionType.deleteGroup,
       inputGroup : actionType.inputGroup,
-      getDetail : asyncAction.getDetail,
-      postArticle : asyncAction.postArticle,
-      loginout : asyncAction.loginout
+      getTodayDetail : actionType.getTodayDetail,
+      postArticle : actionType.postArticle
     },dispatch)
   };
 };
