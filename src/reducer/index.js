@@ -5,7 +5,7 @@ import login from './login/index';
 import list from './list/index';
 
 // import tempArticle from './temp-article/index';
-// import currentScanArticle from './current-scan-article/index';
+import detail from './detail/index';
 
 // import register from './register/index';
 
@@ -20,7 +20,8 @@ import list from './list/index';
 export default combineReducers({
   routing,
   login,
-  list
+  list,
+  detail
 });
 
 
