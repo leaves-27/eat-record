@@ -2,7 +2,7 @@ import { combineReducers } from 'redux';
 import { routerReducer as routing } from 'react-router-redux';
 
 import login from './login/index';
-// import list from './list/index';
+import list from './list/index';
 
 // import tempArticle from './temp-article/index';
 // import currentScanArticle from './current-scan-article/index';
@@ -18,8 +18,9 @@ import login from './login/index';
 // });
 
 export default combineReducers({
+  routing,
   login,
-  routing
+  list
 });
 
 

@@ -4,8 +4,8 @@ import { createReducer } from 'redux-convenient-utils';
 // import { REQUEST_POSTS ,RECEIVE_POSTS } from '../../actions/network';
 // import loginReceiveHanlder from './receive';
 
-import * as User from '../../actions/user';
-import * as Login from '../../actions/login';
+import * as User from '../../actions/login';
+import * as Login from '../../actions/request/login';
 
 const actionTypesApp = Object.assign({},User.actionTypesApp,Login.actionTypesApp);
 

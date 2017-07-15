@@ -1,8 +1,8 @@
 export default  {
-  path: 'list',
-  getComponent : (location, cb) =>{
+  path: '/list',
+  getComponents : (location, callback)=> {
     require.ensure([],(require) => {
-      cb(null,require('../containers/list').default)
+      callback(null,require('../containers/list').default)
     },'list')
   }
 }

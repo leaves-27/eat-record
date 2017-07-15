@@ -23,15 +23,29 @@ const routeConfig = {
   getChildRoutes(location, callback){
     require.ensure([],function (require) {
       callback(null, [
-        require('./login'),
-        require('./detail'),
-        require('./backend'),
-        require('./register'),
-        require('./404')
+        require('./list').default,
+        require('./detail').default,
+        require('./backend').default,
+        require('./register').default,
+        require('./404').default
       ])
     })
   } 
 }
+
+// const routeConfig = {
+//   childRoutes: [{
+//     path: '/',
+//     component: require('../containers/app').default,
+//     childRoutes: [
+//       require('./list').default,
+//       require('./detail').default,
+//       require('./backend').default,
+//       require('./register').default,
+//       require('./404').default
+//     ]
+//   }]
+// }
 
 export default (history) => {
   return (

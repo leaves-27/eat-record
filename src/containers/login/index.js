@@ -48,13 +48,22 @@ class Login extends Component{
     actions.goLogin(login.user);
   }
 
-  render(){
+  componentWillUpdate(nextProps, nextState){
     const { actions,login } = this.props;
-    let result;
 
     if(login.request && login.request.login && login.request.login.isLogin){
       this.context.router.push("/list")
     }
+    
+    return true;
+  }
+  render(){
+    const { actions,login } = this.props;
+    let result;
+
+    // if(login.request && login.request.login && login.request.login.isLogin){
+    //   this.context.router.push("/list")
+    // }
 
     return (
       <div className>
