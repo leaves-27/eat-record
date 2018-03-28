@@ -10,8 +10,8 @@ import createRoutes from './routes';
 
 import 'bootstrap/dist/css/bootstrap.css'
 
-// import jQuery from 'jquery'
-// import bootstrap from 'bootstrap/dist/js/bootstrap'
+import jQuery from 'jquery'
+import bootstrap from 'bootstrap/dist/js/bootstrap'
 
 import stylus from './index.styl';
 
