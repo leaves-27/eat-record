@@ -13,16 +13,20 @@ const routeConfig = {
   path : '/',
   indexRoute : {
     getComponent : (nextState, cb)=>{
+      // require.ensure([],(require) => {
+      //   cb(null,require('../../common/containers/list').default)
+      // },'list')
+
       require.ensure([],(require) => {
-        cb(null,require('../../common/containers/list').default)
-      },'list')
+        cb(null,require('../../common/containers/login').default)
+      },'login')
     }
   },
   component : require('../../common/containers/app').default,
   childRoutes : [
     require('./login'),
-    require('./detail'),
-    require('./backend'),
+    // require('./detail'),
+    // require('./backend'),
     require('./register'),
     require('./404')
   ]

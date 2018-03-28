@@ -3,6 +3,8 @@ var path = require("path");
 var fs = require("fs");
 var jsonObj = JSON.parse(fs.readFileSync('./package.json'));
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
+// var jquery = require("jquery");
+// var bootstrap = require("bootstrap");
 
 var env = process.env.NODE_ENV;
 var compileJSConfig = {
@@ -16,20 +18,16 @@ var compileJSConfig = {
 }
 
 
-var vendor = {
-  jquery:path.join(__dirname,"bower_components/jquery/dist/jquery.min.js"),
-  bootstrap:path.join(__dirname,"bower_components/bootstrap/dist/js/bootstrap.min.js")
-};
+// var vendor = {
+//   jquery : jquery
+// };
 
 var compileImgs = { 
   test: /\.(gif|jpg|png|woff|svg|eot|ttf)\??.*$/, 
   loader: 'url-loader?limit=50000&name=[path][name].[ext]'
 };
 
-var clientLoaders = [{
-  test: require.resolve(vendor.jquery),
-  loader: 'expose?jQuery!expose?$'
-},
+var clientLoaders = [
 compileImgs,
 compileJSConfig,
 {
@@ -60,12 +58,13 @@ var _externals = function() {
 ** 
 **/
 var getEndConfig = function(argv,clientConfig,serverConfig){
-  var config;
-  if(argv == "server") {
-    config = serverConfig;
-  }else{
-    config = clientConfig;
-  }
+  // var config;
+  // if(argv == "server") {
+  //   config = serverConfig;
+  // }else{
+  //   config = clientConfig;
+  // }
+  config = clientConfig;
 
   return config;
 }
@@ -75,7 +74,6 @@ module.exports = {
   entry:{
     client : {
       app :['./src/client/index'],
-      vendor : ["jquery","bootstrap"],
       reacts : ['react','react-dom','react-redux',"react-router","react-router-redux"] 
     },
     server :'./src/server/index.js'
@@ -100,7 +98,7 @@ module.exports = {
   plugins:{
     client : [
       new webpack.optimize.CommonsChunkPlugin({
-        name : ['vendor','reacts'],
+        name : ['reacts'],
         filename: '[name].js'
       }),
       new ExtractTextPlugin("bundle.css"),
@@ -110,14 +108,6 @@ module.exports = {
         }
       })
     ]
-  },
-  resolve:{
-    client:{
-      alias: {
-        jquery:vendor.jquery,
-        bootstrap:vendor.bootstrap
-      }
-    }
   },
   nodeConfig:{
     console:true,

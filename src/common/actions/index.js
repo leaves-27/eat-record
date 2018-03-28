@@ -17,8 +17,17 @@ export const actionTypesApp = createConstants(
   'UPDATE_TOKEN',
   'DEFAULT',
   'REGISTER_CHANGE_USER',
-  'VALIDATE'
+  'VALIDATE',
+  'SET_USER_INFO'
 );
+
+export function setUser(value){
+  return {
+    type : actionTypesApp.SET_USER_INFO,
+    value : value
+  }
+}
+
 
 //action创建函数
 export function resetState(){
