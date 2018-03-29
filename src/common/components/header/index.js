@@ -5,16 +5,19 @@ export default class Header extends Component{
   constructor(props){
     super(props);
   }
+  loginout(){
+
+  }
   render(){
-    let { login,loginout,location } = this.props;
+    let { user,location } = this.props;
     let result;
     let token;
     
-    if (location.query.token) {
+    if (location && location.query && location.query.token) {
       token = location.query.token
     }
 
-    if(login.status==1){
+    if(user.name){
       result = (
         <div className="navbar-collapse collapse" role="navigation">
           <ul className="nav navbar-nav hidden-sm">
@@ -24,7 +27,7 @@ export default class Header extends Component{
           </ul>
           <ul className="nav navbar-nav navbar-right hidden-sm">
             <li>
-              <a onClick={ loginout } href="javascript:void(0)">退出</a>
+              <a onClick={ this.loginout } href="javascript:void(0)">退出</a>
             </li>
           </ul>
         </div>
@@ -33,7 +36,7 @@ export default class Header extends Component{
       result = (
         <div className="navbar-collapse collapse" role="navigation">
           <ul className="nav navbar-nav navbar-right hidden-sm">
-            <li><a href="/login">登陆</a></li>
+            <li><Link to={{ pathname:"/login" }}>登陆</Link></li>
           </ul>
         </div>
       )
