@@ -6,7 +6,7 @@ import { Link } from 'react-router';
 import Header from '../../components/header/index';
 import Group from '../../components/group/index';
 import Message from '../../components/message/index';
-import Utils from '../../../server/utils';
+import { getTime } from '../../utils';
 
 import Modal from '../../components/modal/index';
 
@@ -14,10 +14,11 @@ import * as actionType from '../../actions/index';
 import * as asyncAction from '../../actions/async';
 
 class Backend extends Component{
-  
+
   componentDidMount(){
     const { actions } = this.props;
-    actions.getDetail("diet_get",Utils.time.day);
+    const time = getTime();
+    actions.getDetail("diet_get", time.day);
   }
 
   getFieldset(temp){
@@ -37,7 +38,7 @@ class Backend extends Component{
 
     return fieldsets;
   }
-  
+
   next(){
     const { actions } = this.props;
     //对用户创建的输入框进行验证。若没有输入，触发表单的错误提示
@@ -51,7 +52,7 @@ class Backend extends Component{
       show:true
     });
     $(".confirm-btn",$modal).on("click",function(){
-      $modal.modal('hide');  
+      $modal.modal('hide');
     });
   }
   reload(){
